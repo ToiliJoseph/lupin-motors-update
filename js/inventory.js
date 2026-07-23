@@ -102,6 +102,7 @@ function getUnique(field) {
 
 function buildMakeSelect() {
   const sel   = document.getElementById('filterMake');
+  if (!sel) return;
   const makes = getUnique('make');
   makes.forEach(m => {
     const opt = document.createElement('option');
@@ -151,6 +152,7 @@ function buildYearSelects() {
   const years = getUnique('year').map(Number).sort((a,b) => b-a);
   const minSel = document.getElementById('filterYearMin');
   const maxSel = document.getElementById('filterYearMax');
+  if (!minSel || !maxSel) return;
   years.forEach(y => {
     [minSel, maxSel].forEach(sel => {
       const opt = document.createElement('option');
