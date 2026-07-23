@@ -1,0 +1,636 @@
+
+/* ============================================================
+   RESPONSIVE.CSS — AutoElite Motors
+   Global responsive breakpoints for all pages
+   ============================================================ */
+
+/* ============================================================
+   TABLET LANDSCAPE & SMALL DESKTOP (max-width: 1200px)
+   ============================================================ */
+@media (max-width: 1200px) {
+  .container {
+    padding: 0 var(--space-5);
+  }
+
+  /* Navbar */
+  .navbar-nav {
+    gap: var(--space-4);
+  }
+
+  /* Hero */
+  .hero-title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+  }
+
+  /* Inventory */
+  .inventory-layout {
+    grid-template-columns: 260px 1fr;
+  }
+
+  /* Vehicle Detail */
+  .detail-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-gallery {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* Financing Calculator */
+  .calc-layout {
+    grid-template-columns: 1fr 380px;
+  }
+
+  /* About Story */
+  .story-layout {
+    gap: var(--space-8);
+  }
+
+  /* Team */
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Testimonials */
+  .testimonials-preview {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .testimonial-card--featured {
+    grid-column: span 2;
+  }
+
+  /* Contact */
+  .contact-layout {
+    grid-template-columns: 360px 1fr;
+  }
+
+  /* Departments */
+  .dept-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Rates */
+  .rates-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Why Grid */
+  .why-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Services */
+  .service-card {
+    grid-template-columns: 1fr;
+  }
+
+  .service-card:nth-child(even) .service-image {
+    order: 0;
+  }
+
+  /* Footer */
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+  }
+
+  .footer-brand {
+    grid-column: span 2;
+  }
+}
+
+/* ============================================================
+   TABLET PORTRAIT (max-width: 992px)
+   ============================================================ */
+@media (max-width: 992px) {
+  :root {
+    --navbar-height: 70px;
+  }
+
+  /* Navbar */
+  .navbar-nav {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .navbar-cta {
+    display: none;
+  }
+
+  /* Hero */
+  .hero-layout {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .hero-content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .hero-search {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .hero-stats {
+    justify-content: center;
+  }
+
+  .hero-image-col {
+    display: none;
+  }
+
+  /* Section Headers */
+  .section-header {
+    text-align: center;
+  }
+
+  .section-header p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Inventory */
+  .inventory-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .inventory-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 320px;
+    height: 100vh;
+    z-index: 150;
+    transform: translateX(-100%);
+    transition: transform var(--transition-base);
+    overflow-y: auto;
+  }
+
+  .inventory-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 140;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-base);
+  }
+
+  .sidebar-overlay.open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .filter-toggle {
+    display: flex;
+  }
+
+  /* Vehicle Grid */
+  .vehicle-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Vehicle Detail */
+  .detail-sidebar {
+    position: static;
+  }
+
+  /* Financing */
+  .calc-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .calc-results {
+    position: static;
+  }
+
+  /* About */
+  .story-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .story-stats-float {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    margin-top: var(--space-4);
+    display: inline-block;
+  }
+
+  .stats-bar {
+    flex-wrap: wrap;
+    gap: var(--space-6);
+  }
+
+  .stat-divider {
+    display: none;
+  }
+
+  /* Contact */
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-form-col {
+    position: static;
+  }
+
+  /* CTA Banner */
+  .cta-banner-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .cta-banner-actions {
+    flex-direction: column;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  /* Compare Drawer */
+  .compare-drawer {
+    left: var(--space-4);
+    right: var(--space-4);
+    bottom: var(--space-4);
+  }
+}
+
+/* ============================================================
+   MOBILE LANDSCAPE (max-width: 768px)
+   ============================================================ */
+@media (max-width: 768px) {
+  :root {
+    --space-16: 4rem;
+    --space-12: 3rem;
+    --space-10: 2.5rem;
+    --space-8: 2rem;
+  }
+
+  /* Typography */
+  .heading-xl {
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
+  }
+
+  .display-md {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+  }
+
+  /* Hero */
+  .financing-hero,
+  .about-hero,
+  .contact-hero {
+    padding: calc(var(--navbar-height) + var(--space-8)) 0 var(--space-8);
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 8vw, 2.8rem);
+  }
+
+  /* Vehicle Grid */
+  .vehicle-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .vehicle-grid.list-view .vehicle-card {
+    grid-template-columns: 1fr;
+  }
+
+  .vehicle-grid.list-view .vehicle-image-wrap {
+    height: 200px;
+  }
+
+  /* Categories */
+  .category-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Brands Strip */
+  .brands-strip {
+    gap: var(--space-6);
+  }
+
+  .brand-logo {
+    height: 32px;
+  }
+
+  /* Services Preview */
+  .services-preview-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Why Us */
+  .why-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Testimonials */
+  .testimonials-preview {
+    grid-template-columns: 1fr;
+  }
+
+  .testimonial-card--featured {
+    grid-column: span 1;
+  }
+
+  /* Team */
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Rates */
+  .rates-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Departments */
+  .dept-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Credit Score */
+  .credit-score-options {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Form Rows */
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .form-row--three {
+    grid-template-columns: 1fr;
+  }
+
+  .calc-row-two {
+    grid-template-columns: 1fr;
+  }
+
+  /* Stats Bar */
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+  }
+
+  /* Story Image */
+  .story-image {
+    height: 360px;
+  }
+
+  /* Gallery */
+  .gallery-main {
+    height: 300px;
+  }
+
+  .gallery-thumbs {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  /* Footer */
+  .footer-top {
+    padding: var(--space-10) 0 var(--space-6);
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .footer-brand {
+    grid-column: span 1;
+  }
+
+  .footer-bottom .container {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--space-3);
+  }
+
+  /* Pagination */
+  .pagination {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* Toolbar */
+  .inventory-toolbar {
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  .toolbar-results {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Modals */
+  .modal-content {
+    margin: var(--space-4);
+    max-height: calc(100vh - var(--space-8));
+  }
+
+  /* Lightbox */
+  .lightbox-content {
+    margin: var(--space-4);
+  }
+
+  /* Toast */
+  .toast-container {
+    left: var(--space-4);
+    right: var(--space-4);
+    transform: none;
+  }
+
+  .toast {
+    width: 100%;
+  }
+}
+
+/* ============================================================
+   SMALL MOBILE (max-width: 480px)
+   ============================================================ */
+@media (max-width: 480px) {
+  .container {
+    padding: 0 var(--space-4);
+  }
+
+  /* Hero */
+  .hero-title {
+    font-size: clamp(1.75rem, 9vw, 2.2rem);
+  }
+
+  .hero-subtitle {
+    font-size: var(--text-base);
+  }
+
+  /* Search */
+  .hero-search {
+    flex-direction: column;
+  }
+
+  .hero-search .form-control {
+    border-radius: var(--radius-lg);
+  }
+
+  .hero-search .btn {
+    border-radius: var(--radius-lg);
+  }
+
+  /* Categories */
+  .category-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .category-card {
+    padding: var(--space-4);
+  }
+
+  /* Credit Score */
+  .credit-score-options {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Rate Cards */
+  .rate-num {
+    font-size: var(--text-4xl);
+  }
+
+  /* Team */
+  .team-photo {
+    height: 240px;
+  }
+
+  /* Gallery */
+  .gallery-main {
+    height: 240px;
+  }
+
+  .gallery-thumbs {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Stats */
+  .stat-number {
+    font-size: var(--text-4xl);
+  }
+
+  /* Buttons */
+  .btn-xl {
+    padding: var(--space-3) var(--space-5);
+    font-size: var(--text-sm);
+  }
+
+  /* Cards */
+  .card {
+    padding: var(--space-5);
+  }
+
+  /* Mobile Menu */
+  .mobile-menu {
+    width: 100%;
+  }
+
+  /* Compare Drawer */
+  .compare-drawer {
+    padding: var(--space-4);
+  }
+
+  .compare-vehicles {
+    gap: var(--space-3);
+  }
+
+  .compare-vehicle {
+    min-width: 140px;
+  }
+
+  /* Breadcrumb */
+  .breadcrumb {
+    font-size: var(--text-xs);
+  }
+
+  /* Form */
+  .finance-form,
+  .contact-form,
+  .calc-inputs,
+  .calc-results {
+    padding: var(--space-5);
+  }
+
+  /* FAQ */
+  .faq-question {
+    padding: var(--space-4) var(--space-5);
+    font-size: var(--text-sm);
+  }
+
+  .faq-answer {
+    padding: 0 var(--space-5) var(--space-4);
+  }
+
+  /* CTA */
+  .cta-banner {
+    padding: var(--space-10) 0;
+  }
+
+  /* Footer */
+  .footer-socials {
+    justify-content: center;
+  }
+
+  .footer-bottom-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-3);
+  }
+}
+
+/* ============================================================
+   LARGE SCREENS (min-width: 1400px)
+   ============================================================ */
+@media (min-width: 1400px) {
+  .container {
+    padding: 0;
+  }
+}
+
+/* ============================================================
+   PRINT STYLES
+   ============================================================ */
+@media print {
+  .navbar,
+  .footer,
+  .back-to-top,
+  .toast-container,
+  .mobile-menu,
+  .hamburger,
+  .btn,
+  .cta-banner,
+  .compare-drawer {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  .section {
+    padding: 2rem 0 !important;
+  }
+
+  .vehicle-card,
+  .card {
+    break-inside: avoid;
+    border: 1px solid #ddd;
+  }
+}

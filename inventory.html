@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Primary Meta Tags -->
+  <title>Vehicle Inventory | Lupin Motors</title>
+  <meta name="title" content="Vehicle Inventory | Lupin Motors">
+  <meta name="description" content="Browse our full inventory of luxury and pre-owned vehicles. Filter by make, model, price, year and more. Find your perfect car at Lupin Motors.">
+  <meta name="keywords" content="car inventory, luxury cars for sale, pre-owned cars, Porsche, Mercedes-Benz, BMW, Toyota, car search, auto dealership">
+  <meta name="author" content="Lupin Motors">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://example.com/inventory.html">
+  <meta property="og:title" content="Vehicle Inventory | Lupin Motors">
+  <meta property="og:description" content="Browse our full inventory of luxury and pre-owned vehicles.">
+  <meta property="og:image" content="https://example.com/images/og-inventory.jpg">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://example.com/inventory.html">
+  <meta property="twitter:title" content="Vehicle Inventory | Lupin Motors">
+  <meta property="twitter:description" content="Browse our full inventory of luxury and pre-owned vehicles.">
+  <meta property="twitter:image" content="https://example.com/images/og-inventory.jpg">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/favicon.jpg">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/inventory.css">
+  <link rel="stylesheet" href="css/cards.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/animations.css">  
+  <link rel="stylesheet" href="css/responsive.css">
+  <meta property="twitter:description" content="Discover luxury and pre-owned vehicles at Lupin Motors.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- <link rel="stylesheet" href="css/light-theme.css"> -->
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar navbar-scrolled" id="navbar">
+    <div class="navbar-container">
+      <!-- NEW - Your Logo Image -->
+          <a href="index.html" class="navbar-brand">
+            <img src="images/logo/logo.jpg" alt="Lupin Carsales Team" class="navbar-logo">
+          </a>
+      <nav class="navbar-nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="inventory.html" class="nav-link active">Inventory</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="financing.html" class="nav-link">Financing</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <div class="navbar-actions">
+        <a href="inventory.html" class="btn btn-primary btn-sm navbar-cta">
+          <i data-lucide="search" width="14" height="14"></i> Browse Cars
+        </a>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <nav class="mobile-nav">
+        <a href="index.html" class="mobile-nav-link">Home</a>
+        <a href="inventory.html" class="mobile-nav-link active">Inventory</a>
+        <a href="services.html" class="mobile-nav-link">Services</a>
+        <a href="financing.html" class="mobile-nav-link">Financing</a>
+        <a href="about.html" class="mobile-nav-link">About</a>
+        <a href="contact.html" class="mobile-nav-link">Contact</a>
+        <div class="mobile-nav-footer">
+          <a href="tel:+18005550199" class="mobile-contact-link">
+            <i data-lucide="phone" width="16" height="16"></i> +1 800 555 0199
+          </a>
+          <a href="inventory.html" class="btn btn-primary btn-full mt-4">Browse Inventory</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="inventory-main">
+
+    <!-- PAGE HEADER -->
+    <section class="inv-page-header">
+      <div class="container">
+        <div class="inv-header-content">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="index.html">Home</a>
+            <span class="breadcrumb-sep">›</span>
+            <span class="current">Inventory</span>
+          </nav>
+          <h1 class="inv-page-title">
+            Vehicle <span class="text-gold">Inventory</span>
+          </h1>
+          <p class="inv-page-subtitle">Browse our complete collection of new and pre-owned vehicles</p>
+        </div>
+        <!-- Quick Stats -->
+        <div class="inv-quick-stats">
+          <div class="inv-stat">
+            <span class="inv-stat-num" id="totalCount">0</span>
+            <span class="inv-stat-label">Total Vehicles</span>
+          </div>
+          <div class="inv-stat">
+            <span class="inv-stat-num" id="newCount">0</span>
+            <span class="inv-stat-label">Brand New</span>
+          </div>
+          <div class="inv-stat">
+            <span class="inv-stat-num" id="usedCount">0</span>
+            <span class="inv-stat-label">Pre-Owned</span>
+          </div>
+          <div class="inv-stat">
+            <span class="inv-stat-num" id="dealCount">0</span>
+            <span class="inv-stat-label">Weekly Deals</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container inv-layout">
+
+      <!-- ====================================================
+           SIDEBAR FILTERS
+      ==================================================== -->
+      <aside class="inv-sidebar" id="filterSidebar">
+        <div class="sidebar-header">
+          <h3 class="sidebar-title">
+            <i data-lucide="sliders-horizontal" width="18" height="18"></i>
+            Filter Vehicles
+          </h3>
+          <button class="btn btn-ghost btn-sm" id="clearAllFilters">
+            Clear All
+          </button>
+        </div>
+
+        <!-- Active Filters Tags -->
+        <div class="active-filters" id="activeFilters" style="display:none">
+          <div class="active-filters-list" id="activeFiltersList"></div>
+        </div>
+
+        <!-- Search -->
+        <div class="filter-section">
+          <label class="filter-label">Search</label>
+          <div class="search-input-wrap">
+            <i data-lucide="search" width="16" height="16" class="search-icon"></i>
+            <input
+              type="text"
+              class="form-control search-input"
+              id="searchInput"
+              placeholder="Make, model, keyword…"
+              autocomplete="off"
+            />
+            <button class="search-clear-btn hidden" id="searchClearBtn" aria-label="Clear search">
+              <i data-lucide="x" width="14" height="14"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Condition -->
+        <div class="filter-section">
+          <label class="filter-label">Condition</label>
+          <div class="filter-toggle-group">
+            <button class="filter-toggle active" data-filter="condition" data-value="">All</button>
+            <button class="filter-toggle" data-filter="condition" data-value="new">New</button>
+            <button class="filter-toggle" data-filter="condition" data-value="pre-owned">pre-owned</button>
+          </div>
+        </div>
+
+        <!-- Make -->
+        <div class="filter-section">
+          <label class="filter-label">Make</label>
+          <select class="form-control" id="filterMake">
+            <option value="">All Makes</option>
+          </select>
+        </div>
+
+        <!-- Model -->
+        <div class="filter-section">
+          <label class="filter-label">Model</label>
+          <select class="form-control" id="filterModel" disabled>
+            <option value="">All Models</option>
+          </select>
+        </div>
+
+        <!-- Vehicle Type -->
+        <div class="filter-section">
+          <label class="filter-label">Vehicle Type</label>
+          <div class="filter-checkbox-list" id="typeFilterList">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- Year Range -->
+        <div class="filter-section">
+          <label class="filter-label">
+            Year Range
+            <span class="filter-label-val" id="yearRangeLabel">Any</span>
+          </label>
+          <div class="range-inputs">
+            <select class="form-control" id="filterYearMin">
+              <option value="">From</option>
+            </select>
+            <span class="range-sep">–</span>
+            <select class="form-control" id="filterYearMax">
+              <option value="">To</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Price Range -->
+        <div class="filter-section">
+          <label class="filter-label">
+            Price Range
+            <span class="filter-label-val" id="priceRangeLabel">Any</span>
+          </label>
+          <div class="price-slider-wrap">
+            <!-- NEW (max $15,000,000) -->
+            <input type="range" id="priceMin" min="0" max="15000000" value="0">
+            <input type="range" id="priceMax" min="0" max="15000000" value="15000000">
+            <div class="price-track" id="priceTrack"></div>
+          </div>
+          <div class="range-display">
+            <span id="priceMinDisplay">$0</span>
+            <span id="priceMaxDisplay">$200,000+</span>
+          </div>
+        </div>
+
+        <!-- Mileage -->
+        <div class="filter-section">
+          <label class="filter-label">Max Mileage</label>
+          <select class="form-control" id="filterMileage">
+            <option value="">Any Mileage</option>
+            <option value="10000">Under 10,000 mi</option>
+            <option value="25000">Under 25,000 mi</option>
+            <option value="50000">Under 50,000 mi</option>
+            <option value="75000">Under 75,000 mi</option>
+            <option value="100000">Under 100,000 mi</option>
+          </select>
+        </div>
+
+        <!-- Fuel Type -->
+        <div class="filter-section">
+          <label class="filter-label">Fuel Type</label>
+          <div class="filter-checkbox-list" id="fuelFilterList">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- Drivetrain -->
+        <div class="filter-section">
+          <label class="filter-label">Drivetrain</label>
+          <div class="filter-checkbox-list" id="driveFilterList">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- Special Filters -->
+        <div class="filter-section">
+          <label class="filter-label">Special</label>
+          <div class="filter-switch-list">
+            <label class="filter-switch">
+              <input type="checkbox" id="filterFeatured" />
+              <span class="switch-slider"></span>
+              <span class="switch-label">Featured Only</span>
+            </label>
+            <label class="filter-switch">
+              <input type="checkbox" id="filterDeals" />
+              <span class="switch-slider"></span>
+              <span class="switch-label">Weekly Deals</span>
+            </label>
+            <label class="filter-switch">
+              <input type="checkbox" id="filterCertified" />
+              <span class="switch-slider"></span>
+              <span class="switch-label">CPO Certified</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Apply Filters (mobile) -->
+        <button class="btn btn-primary btn-full filter-apply-btn" id="applyFiltersMobile">
+          <i data-lucide="check" width="16" height="16"></i>
+          Apply Filters
+        </button>
+      </aside>
+
+      <!-- ====================================================
+           MAIN CONTENT — TOOLBAR + GRID
+      ==================================================== -->
+      <div class="inv-content">
+
+        <!-- Toolbar -->
+        <div class="inv-toolbar">
+          <div class="inv-toolbar-left">
+            <!-- Mobile filter toggle -->
+            <button class="btn btn-ghost btn-sm filter-toggle-mobile" id="filterToggleMobile">
+              <i data-lucide="sliders-horizontal" width="16" height="16"></i>
+              Filters
+              <span class="filter-badge hidden" id="filterBadge">0</span>
+            </button>
+            <span class="inv-result-count">
+              Showing <strong id="showingCount">0</strong> of <strong id="ofCount">0</strong> vehicles
+            </span>
+          </div>
+          <div class="inv-toolbar-right">
+            <!-- Compare button -->
+            <button class="btn btn-ghost btn-sm compare-btn hidden" id="compareBtn">
+              <i data-lucide="bar-chart-2" width="16" height="16"></i>
+              Compare (<span id="compareCount">0</span>)
+            </button>
+            <!-- View toggle -->
+            <div class="view-toggle">
+              <button class="view-btn active" id="gridViewBtn" aria-label="Grid view">
+                <i data-lucide="layout-grid" width="16" height="16"></i>
+              </button>
+              <button class="view-btn" id="listViewBtn" aria-label="List view">
+                <i data-lucide="layout-list" width="16" height="16"></i>
+              </button>
+            </div>
+            <!-- Sort -->
+            <select class="form-control sort-select" id="sortSelect">
+              <option value="featured">Featured First</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="year-desc">Newest First</option>
+              <option value="year-asc">Oldest First</option>
+              <option value="mileage-asc">Lowest Mileage</option>
+              <option value="name-asc">Make: A–Z</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Vehicle Grid / List -->
+        <div class="vehicle-grid" id="vehicleGrid">
+          <!-- Skeleton Loaders -->
+          <div class="vehicle-card skeleton-card">
+            <div class="skeleton skeleton-img"></div>
+            <div class="skeleton-body">
+              <div class="skeleton skeleton-line w-60"></div>
+              <div class="skeleton skeleton-line w-40"></div>
+              <div class="skeleton skeleton-line w-80"></div>
+              <div class="skeleton skeleton-line w-50"></div>
+            </div>
+          </div>
+          <div class="vehicle-card skeleton-card">
+            <div class="skeleton skeleton-img"></div>
+            <div class="skeleton-body">
+              <div class="skeleton skeleton-line w-60"></div>
+              <div class="skeleton skeleton-line w-40"></div>
+              <div class="skeleton skeleton-line w-80"></div>
+              <div class="skeleton skeleton-line w-50"></div>
+            </div>
+          </div>
+          <div class="vehicle-card skeleton-card">
+            <div class="skeleton skeleton-img"></div>
+            <div class="skeleton-body">
+              <div class="skeleton skeleton-line w-60"></div>
+              <div class="skeleton skeleton-line w-40"></div>
+              <div class="skeleton skeleton-line w-80"></div>
+              <div class="skeleton skeleton-line w-50"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- No Results -->
+        <div class="no-results hidden" id="noResults">
+          <div class="no-results-icon">
+            <i data-lucide="search-x" width="48" height="48"></i>
+          </div>
+          <h3>No vehicles found</h3>
+          <p>Try adjusting your filters or <button class="link-btn" id="resetFromEmpty">clear all filters</button> to see all inventory.</p>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-wrap" id="paginationWrap">
+          <div class="pagination" id="pagination"></div>
+          <div class="per-page-wrap">
+            <span>Show:</span>
+            <select class="form-control per-page-select" id="perPageSelect">
+              <option value="12">12</option>
+              <option value="24" selected>24</option>
+              <option value="48">48</option>
+              <option value="96">96</option>
+            </select>
+            <span>per page</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ====================================================
+       COMPARE DRAWER (slide-up)
+  ==================================================== -->
+  <div class="compare-drawer hidden" id="compareDrawer">
+    <div class="compare-drawer-inner">
+      <div class="compare-drawer-header">
+        <h4>Compare Vehicles (<span id="compareDrawerCount">0</span>/3)</h4>
+        <button class="btn btn-ghost btn-sm" id="closeCompareDrawer">
+          <i data-lucide="x" width="16" height="16"></i>
+        </button>
+      </div>
+      <div class="compare-slots" id="compareSlots"></div>
+      <button class="btn btn-primary" id="goCompareBtn" disabled>
+        <i data-lucide="bar-chart-2" width="16" height="16"></i>
+        Compare Now
+      </button>
+    </div>
+  </div>
+
+  <!-- FILTER OVERLAY (mobile) -->
+  <div class="filter-overlay hidden" id="filterOverlay"></div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <a href="index.html" class="footer-logo">
+              <div class="logo-icon">
+                <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+                  <polygon points="16,2 30,10 30,22 16,30 2,22 2,10" fill="none" stroke="#c9a84c" stroke-width="1.5"/>
+                  <circle cx="16" cy="16" r="3" fill="#c9a84c"/>
+                </svg>
+              </div>
+              <div class="logo-text">
+                <span class="logo-name">Lupin</span>
+                <span class="logo-tag">Motors</span>
+              </div>
+            </a>
+            <p class="footer-brand-desc">Your trusted premium dealership since 2009. New and pre-owned vehicles, expert service, and unbeatable financing.</p>
+            <div class="footer-socials">
+                  <a href="#" class="social-btn" aria-label="Facebook">
+                    <i class="fab fa-facebook-f" style="font-size:18px"></i>
+                  </a>
+                  <a href="https://www.instagram.com/lupinthird500?igsh=MWM2dnV6dTBmanVoaw==" class="social-btn" aria-label="Instagram">
+                    <i class="fab fa-instagram" style="font-size:18px"></i>
+                  </a>
+                  <a href="#" class="social-btn" aria-label="Twitter">
+                    <i class="fab fa-x-twitter" style="font-size:18px"></i>
+                  </a>
+                  <a href="#" class="social-btn" aria-label="YouTube">
+                    <i class="fab fa-youtube" style="font-size:18px"></i>
+                  </a>
+                  <a href="https://chat.whatsapp.com/DNKGMyJfE2G0DI1iDgfOAW?mode=gi_t" class="social-btn" aria-label="WhatsApp">
+                    <i class="fab fa-whatsapp" style="font-size:18px"></i>
+                  </a>
+            </div>
+          </div>
+          <div class="footer-col">
+            <h4 class="footer-col-title">Inventory</h4>
+            <ul class="footer-links">
+              <li><a href="inventory.html?condition=new">New Vehicles</a></li>
+              <li><a href="inventory.html?condition=used">Pre-Owned</a></li>
+              <li><a href="inventory.html?type=suv">SUVs</a></li>
+              <li><a href="inventory.html?type=sedan">Sedans</a></li>
+              <li><a href="inventory.html?type=truck">Trucks</a></li>
+              <li><a href="inventory.html?filter=deals">Weekly Deals</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4 class="footer-col-title">Services</h4>
+            <ul class="footer-links">
+              <li><a href="services.html#certified">Certified Pre-Owned</a></li>
+              <li><a href="services.html#tradein">Trade-In</a></li>
+              <li><a href="services.html#service">Servicing</a></li>
+              <li><a href="financing.html">Financing</a></li>
+              <li><a href="services.html#warranty">Warranty</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4 class="footer-col-title">Contact</h4>
+            <ul class="footer-contact-list">
+              <li><i data-lucide="map-pin" width="16" height="16"></i><span>Nairobi, Kiambu road</span></li>
+              <li><i data-lucide="phone" width="16" height="16"></i><a href="tel:+18005550199">+254 745783953</a></li>
+              <li><i data-lucide="mail" width="16" height="16"></i><a href="mailto:info@Lupin.com">lupinthird500@gmail.com</a></li>
+              <li><i data-lucide="clock" width="16" height="16"></i><span>Mon–Sat: 8am–8pm</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2025 Lupin Motors. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i data-lucide="chevron-up" width="20" height="20"></i>
+  </button>
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="js/main.js" defer></script>
+  <script src="js/inventory.js" defer></script>
+  <script src="js/animations.js" defer></script>
+</body>
+</html>

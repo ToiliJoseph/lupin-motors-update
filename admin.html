@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lupin Admin | Vehicle Manager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #1a365d; --primary-light: #2c5282; --primary-dark: #0f1f33;
+      --bg: #f0f2f5; --card: #ffffff; --border: #e2e8f0;
+      --text: #1e293b; --text-secondary: #475569; --text-muted: #64748b;
+      --success: #059669; --error: #dc2626; --warning: #d97706;
+      --shadow: 0 4px 16px rgba(15,23,42,0.08); --shadow-lg: 0 8px 32px rgba(15,23,42,0.12);
+    }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+    /* Header */
+    .admin-header { background: linear-gradient(135deg, var(--primary-dark), var(--primary)); color: white; padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+    .admin-header h1 { font-size: 1.5rem; font-weight: 700; display: flex; align-items: center; gap: 0.75rem; }
+    .admin-header h1 svg { width: 32px; height: 32px; }
+    .header-actions { display: flex; gap: 1rem; align-items: center; }
+    .btn { padding: 0.6rem 1.2rem; border-radius: 8px; border: none; font-weight: 600; cursor: pointer; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.2s; }
+    .btn-primary { background: var(--primary-light); color: white; }
+    .btn-primary:hover { background: #3d6fa8; transform: translateY(-1px); }
+    .btn-success { background: var(--success); color: white; }
+    .btn-success:hover { background: #047857; }
+    .btn-danger { background: var(--error); color: white; }
+    .btn-danger:hover { background: #b91c1c; }
+    .btn-secondary { background: white; color: var(--primary); border: 1px solid var(--border); }
+    .btn-secondary:hover { background: var(--bg); }
+    .btn-sm { padding: 0.4rem 0.8rem; font-size: 0.8rem; }
+
+    /* Layout */
+    .admin-container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+    .admin-grid { display: grid; grid-template-columns: 320px 1fr; gap: 2rem; }
+
+    /* Sidebar Stats */
+    .stats-card { background: var(--card); border-radius: 12px; padding: 1.5rem; box-shadow: var(--shadow); margin-bottom: 1.5rem; }
+    .stats-card h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 1rem; }
+    .stat-row { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .stat-row:last-child { border-bottom: none; }
+    .stat-value { font-weight: 700; color: var(--primary); }
+
+    /* Vehicle List */
+    .vehicle-list-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+    .vehicle-list-header h2 { font-size: 1.25rem; }
+    .search-box { position: relative; }
+    .search-box input { padding: 0.6rem 1rem 0.6rem 2.5rem; border: 1px solid var(--border); border-radius: 8px; width: 280px; font-size: 0.9rem; }
+    .search-box svg { position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); color: var(--text-muted); width: 18px; height: 18px; }
+
+    .vehicle-table-wrap { background: var(--card); border-radius: 12px; box-shadow: var(--shadow); overflow: hidden; }
+    .vehicle-table { width: 100%; border-collapse: collapse; }
+    .vehicle-table th { text-align: left; padding: 1rem; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted); background: var(--bg); border-bottom: 1px solid var(--border); font-weight: 600; }
+    .vehicle-table td { padding: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; vertical-align: middle; }
+    .vehicle-table tr:hover { background: #f8fafc; }
+    .vehicle-table tr:last-child td { border-bottom: none; }
+
+    .vehicle-thumb { width: 60px; height: 45px; object-fit: cover; border-radius: 6px; background: var(--bg); }
+    .vehicle-name { font-weight: 600; color: var(--text); }
+    .vehicle-year { color: var(--text-muted); font-size: 0.8rem; }
+    .price-tag { font-weight: 700; color: var(--primary); font-size: 0.95rem; }
+    .condition-badge { padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
+    .condition-new { background: rgba(5,150,105,0.1); color: var(--success); }
+    .condition-used { background: rgba(217,119,6,0.1); color: var(--warning); }
+    .condition-cpo { background: rgba(37,99,235,0.1); color: var(--primary-light); }
+    .actions-cell { display: flex; gap: 0.5rem; }
+
+    /* Modal / Form */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(15,23,42,0.5); z-index: 200; display: none; align-items: center; justify-content: center; padding: 2rem; }
+    .modal-overlay.open { display: flex; }
+    .modal { background: var(--card); border-radius: 16px; width: 100%; max-width: 900px; max-height: 90vh; overflow-y: auto; box-shadow: var(--shadow-lg); }
+    .modal-header { padding: 1.5rem 2rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: var(--card); z-index: 10; }
+    .modal-header h2 { font-size: 1.25rem; }
+    .modal-close { background: none; border: none; font-size: 1.5rem; color: var(--text-muted); cursor: pointer; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 8px; }
+    .modal-close:hover { background: var(--bg); color: var(--text); }
+    .modal-body { padding: 2rem; }
+    .modal-footer { padding: 1.5rem 2rem; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 1rem; position: sticky; bottom: 0; background: var(--card); }
+
+    /* Form Grid */
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-group.full-width { grid-column: span 2; }
+    .form-group label { font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); }
+    .form-group label .required { color: var(--error); }
+    .form-group input, .form-group select, .form-group textarea {
+      padding: 0.65rem 0.9rem; border: 1px solid var(--border); border-radius: 8px; font-size: 0.9rem; font-family: inherit; background: white; color: var(--text);
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(26,54,93,0.1);
+    }
+    .form-group textarea { resize: vertical; min-height: 80px; }
+    .form-hint { font-size: 0.8rem; color: var(--text-muted); }
+
+    /* Image Upload */
+    .image-upload-zone {
+      border: 2px dashed var(--border); border-radius: 12px; padding: 2rem; text-align: center; cursor: pointer; transition: all 0.2s; background: var(--bg);
+    }
+    .image-upload-zone:hover { border-color: var(--primary); background: rgba(26,54,93,0.02); }
+    .image-upload-zone svg { width: 48px; height: 48px; color: var(--text-muted); margin-bottom: 0.75rem; }
+    .image-upload-zone p { color: var(--text-secondary); font-size: 0.9rem; }
+    .image-upload-zone small { color: var(--text-muted); font-size: 0.8rem; }
+    .image-preview-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin-top: 1rem; }
+    .image-preview { position: relative; border-radius: 8px; overflow: hidden; aspect-ratio: 4/3; background: var(--bg); }
+    .image-preview img { width: 100%; height: 100%; object-fit: cover; }
+    .image-preview .remove-img { position: absolute; top: 4px; right: 4px; width: 24px; height: 24px; background: var(--error); color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; }
+
+    /* Features Tags */
+    .features-input { display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0.5rem; border: 1px solid var(--border); border-radius: 8px; min-height: 46px; align-items: center; }
+    .feature-tag { background: var(--primary); color: white; padding: 0.3rem 0.7rem; border-radius: 20px; font-size: 0.8rem; display: flex; align-items: center; gap: 0.4rem; }
+    .feature-tag button { background: none; border: none; color: white; cursor: pointer; font-size: 0.9rem; opacity: 0.7; }
+    .feature-tag button:hover { opacity: 1; }
+    .features-input input { border: none; outline: none; flex: 1; min-width: 120px; font-size: 0.9rem; padding: 0.3rem; }
+
+    /* Specs Grid */
+    .specs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+
+    /* Toast */
+    .toast-container { position: fixed; bottom: 2rem; right: 2rem; display: flex; flex-direction: column; gap: 0.75rem; z-index: 300; }
+    .toast { padding: 1rem 1.25rem; background: var(--card); border-radius: 10px; box-shadow: var(--shadow-lg); display: flex; align-items: center; gap: 0.75rem; font-size: 0.9rem; border-left: 4px solid; animation: slideIn 0.3s ease; }
+    .toast.success { border-color: var(--success); }
+    .toast.error { border-color: var(--error); }
+    .toast.info { border-color: var(--primary); }
+    @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+    /* Empty State */
+    .empty-state { text-align: center; padding: 4rem 2rem; }
+    .empty-state svg { width: 80px; height: 80px; color: var(--border); margin-bottom: 1.5rem; }
+    .empty-state h3 { color: var(--text-secondary); margin-bottom: 0.5rem; }
+    .empty-state p { color: var(--text-muted); margin-bottom: 1.5rem; }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .admin-grid { grid-template-columns: 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-group.full-width { grid-column: span 1; }
+      .specs-grid { grid-template-columns: 1fr 1fr; }
+      .vehicle-table-wrap { overflow-x: auto; }
+    }
+    @media (max-width: 768px) {
+      .admin-header { flex-direction: column; gap: 1rem; text-align: center; }
+      .admin-container { padding: 1rem; }
+      .modal { max-height: 95vh; }
+      .search-box input { width: 200px; }
+      .specs-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+<base target="_blank">
+</head>
+<body>
+
+  <header class="admin-header">
+    <h1>
+      <svg viewBox="0 0 32 32" fill="none"><polygon points="16,2 30,10 30,22 16,30 2,22 2,10" fill="none" stroke="#c9a84c" stroke-width="1.5"/><circle cx="16" cy="16" r="3" fill="#c9a84c"/></svg>
+      Lupin Admin
+    </h1>
+    <div class="header-actions">
+      <button class="btn btn-success" onclick="openModal()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Add New Vehicle
+      </button>
+      <button class="btn btn-secondary" onclick="document.getElementById('importInput').click()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Import JSON
+      </button>
+      <input type="file" id="importInput" accept=".json" style="display:none" onchange="importJSON(this)">
+      <button class="btn btn-secondary" onclick="exportJSON()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Export JSON
+      </button>
+    </div>
+  </header>
+
+  <div class="admin-container">
+    <div class="admin-grid">
+      <!-- Sidebar -->
+      <aside>
+        <div class="stats-card">
+          <h3>Inventory Overview</h3>
+          <div class="stat-row"><span>Total Vehicles</span><span class="stat-value" id="statTotal">0</span></div>
+          <div class="stat-row"><span>New</span><span class="stat-value" id="statNew">0</span></div>
+          <div class="stat-row"><span>Pre-Owned</span><span class="stat-value" id="statUsed">0</span></div>
+          <div class="stat-row"><span>CPO</span><span class="stat-value" id="statCPO">0</span></div>
+          <div class="stat-row"><span>Avg. Price</span><span class="stat-value" id="statAvg">$0</span></div>
+        </div>
+        <div class="stats-card">
+          <h3>Quick Filters</h3>
+          <div class="stat-row" style="cursor:pointer" onclick="filterList('all')"><span>All Vehicles</span><span class="stat-value">→</span></div>
+          <div class="stat-row" style="cursor:pointer" onclick="filterList('new')"><span>New Only</span><span class="stat-value">→</span></div>
+          <div class="stat-row" style="cursor:pointer" onclick="filterList('used')"><span>Pre-Owned</span><span class="stat-value">→</span></div>
+          <div class="stat-row" style="cursor:pointer" onclick="filterList('cpo')"><span>Certified</span><span class="stat-value">→</span></div>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main>
+        <div class="vehicle-list-header">
+          <h2>Vehicle Inventory</h2>
+          <div class="search-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="searchInput" placeholder="Search by make, model, or year..." oninput="searchVehicles(this.value)">
+          </div>
+        </div>
+
+        <div class="vehicle-table-wrap">
+          <table class="vehicle-table">
+            <thead>
+              <tr>
+                <th>Vehicle</th>
+                <th>Year</th>
+                <th>Condition</th>
+                <th>Price</th>
+                <th>Mileage</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="vehicleTableBody">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+          <div id="emptyState" class="empty-state" style="display:none">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+            <h3>No vehicles found</h3>
+            <p>Add your first vehicle to get started</p>
+            <button class="btn btn-primary" onclick="openModal()">Add Vehicle</button>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Add/Edit Modal -->
+  <div class="modal-overlay" id="vehicleModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="modalTitle">Add New Vehicle</h2>
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="vehicleForm" onsubmit="saveVehicle(event)">
+          <input type="hidden" id="vehicleId">
+
+          <!-- Images -->
+          <div class="form-group full-width">
+            <label>Vehicle Images</label>
+            <div class="image-upload-zone" onclick="document.getElementById('imageInput').click()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+              <p>Click to upload images</p>
+              <small>PNG, JPG up to 5MB each. First image is the main photo.</small>
+            </div>
+            <input type="file" id="imageInput" multiple accept="image/*" style="display:none" onchange="handleImages(this)">
+            <div class="image-preview-grid" id="imagePreviewGrid"></div>
+            <input type="hidden" id="imagePaths" value="">
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Make <span class="required">*</span></label>
+              <input type="text" id="make" placeholder="e.g. BMW, Mercedes, Lexus" required>
+            </div>
+            <div class="form-group">
+              <label>Model <span class="required">*</span></label>
+              <input type="text" id="model" placeholder="e.g. 5 Series, GLE, RX" required>
+            </div>
+            <div class="form-group">
+              <label>Year <span class="required">*</span></label>
+              <input type="number" id="year" placeholder="2024" min="1990" max="2030" required>
+            </div>
+            <div class="form-group">
+              <label>Condition <span class="required">*</span></label>
+              <select id="condition" required>
+                <option value="">Select condition</option>
+                <option value="new">New</option>
+                <option value="used">Pre-Owned</option>
+                <option value="cpo">Certified Pre-Owned</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Price ($) <span class="required">*</span></label>
+              <input type="number" id="price" placeholder="45000" min="0" required>
+            </div>
+            <div class="form-group">
+              <label>Mileage</label>
+              <input type="number" id="mileage" placeholder="15000" min="0">
+            </div>
+            <div class="form-group">
+              <label>Body Type</label>
+              <select id="bodyType">
+                <option value="">Select type</option>
+                <option value="sedan">Sedan</option>
+                <option value="suv">SUV</option>
+                <option value="coupe">Coupe</option>
+                <option value="convertible">Convertible</option>
+                <option value="wagon">Wagon</option>
+                <option value="truck">Truck</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Fuel Type</label>
+              <select id="fuelType">
+                <option value="">Select fuel</option>
+                <option value="gasoline">Gasoline</option>
+                <option value="diesel">Diesel</option>
+                <option value="hybrid">Hybrid</option>
+                <option value="electric">Electric</option>
+                <option value="plugin-hybrid">Plug-in Hybrid</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Transmission</label>
+              <select id="transmission">
+                <option value="">Select transmission</option>
+                <option value="automatic">Automatic</option>
+                <option value="manual">Manual</option>
+                <option value="cvt">CVT</option>
+                <option value="dct">Dual-Clutch</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Drivetrain</label>
+              <select id="drivetrain">
+                <option value="">Select drivetrain</option>
+                <option value="fwd">Front-Wheel Drive</option>
+                <option value="rwd">Rear-Wheel Drive</option>
+                <option value="awd">All-Wheel Drive</option>
+                <option value="4wd">4-Wheel Drive</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Exterior Color</label>
+              <input type="text" id="extColor" placeholder="e.g. Alpine White">
+            </div>
+            <div class="form-group">
+              <label>Interior Color</label>
+              <input type="text" id="intColor" placeholder="e.g. Black Leather">
+            </div>
+            <div class="form-group">
+              <label>Engine</label>
+              <input type="text" id="engine" placeholder="e.g. 3.0L V6 Turbo">
+            </div>
+            <div class="form-group">
+              <label>Horsepower</label>
+              <input type="number" id="horsepower" placeholder="350" min="0">
+            </div>
+          </div>
+
+          <!-- Features -->
+          <div class="form-group full-width" style="margin-top:1.5rem">
+            <label>Features & Options <span class="form-hint">Type a feature and press Enter</span></label>
+            <div class="features-input" id="featuresInput" onclick="document.getElementById('featureInput').focus()">
+              <input type="text" id="featureInput" placeholder="e.g. Leather Seats, Sunroof, Navigation..." onkeydown="handleFeatureKey(event)">
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="form-group full-width">
+            <label>Description</label>
+            <textarea id="description" rows="3" placeholder="Brief description of the vehicle..."></textarea>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+            <button type="submit" class="btn btn-success">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Save Vehicle
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script>
+    // ============================================================
+    // DATA STORAGE (using localStorage for persistence)
+    // ============================================================
+    let vehicles = JSON.parse(localStorage.getItem('Lupin_vehicles')) || [];
+    let editingId = null;
+    let tempImages = [];
+
+    // Warn about localStorage usage
+    const storageUsed = JSON.stringify(localStorage).length;
+    const storageLimit = 5 * 1024 * 1024; // 5MB typical limit
+    console.log('localStorage usage:', (storageUsed/1024).toFixed(1), 'KB /', (storageLimit/1024).toFixed(0), 'KB limit');
+
+    if (storageUsed > storageLimit * 0.8) {
+      showToast('Warning: Storage nearly full. Export your data soon!', 'error');
+    }
+
+    // Initialize with sample data if empty
+    if (vehicles.length === 0) {
+      vehicles = [
+        { id: 1, make: 'BMW', model: '5 Series', year: 2024, condition: 'new', price: 65000, mileage: 0, bodyType: 'sedan', fuelType: 'gasoline', transmission: 'automatic', drivetrain: 'rwd', extColor: 'Alpine White', intColor: 'Black Leather', engine: '3.0L I6 Turbo', horsepower: 375, features: ['Leather Seats','Navigation','Sunroof','Heated Seats'], description: 'Luxury sedan with premium features.', images: ['images/vehicles/bmw-5series-1.jpg'] },
+        { id: 2, make: 'Mercedes-Benz', model: 'GLE 450', year: 2023, condition: 'used', price: 58000, mileage: 12500, bodyType: 'suv', fuelType: 'gasoline', transmission: 'automatic', drivetrain: 'awd', extColor: 'Obsidian Black', intColor: 'Beige Leather', engine: '3.0L I6 Turbo', horsepower: 362, features: ['Panoramic Roof','Burmester Audio','360 Camera'], description: 'Well-maintained luxury SUV.', images: ['images/vehicles/mercedes-gle-1.jpg'] }
+      ];
+      saveToStorage();
+    }
+
+    function saveToStorage() {
+      try {
+        const json = JSON.stringify(vehicles);
+        localStorage.setItem('Lupin_vehicles', json);
+        console.log('Saved to localStorage:', (json.length/1024).toFixed(1), 'KB');
+      } catch (e) {
+        if (e.name === 'QuotaExceededError') {
+          showToast('Storage full! Images too large. Export data and clear storage.', 'error');
+          console.error('localStorage quota exceeded. Data size:', JSON.stringify(vehicles).length);
+        } else {
+          showToast('Error saving: ' + e.message, 'error');
+          console.error('Save error:', e);
+        }
+      }
+    }
+
+    // ============================================================
+    // RENDER VEHICLE LIST
+    // ============================================================
+    function renderTable(filtered = vehicles) {
+      const tbody = document.getElementById('vehicleTableBody');
+      const empty = document.getElementById('emptyState');
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = '';
+        empty.style.display = 'block';
+        return;
+      }
+      empty.style.display = 'none';
+
+      // Build table rows using DOM methods instead of innerHTML for reliability
+      tbody.innerHTML = '';
+
+      filtered.forEach(v => {
+        const vehicleId = String(v.id);
+        const imgSrc = (v.images && v.images.length > 0) ? v.images[0] : '';
+        const condLabel = v.condition === 'cpo' ? 'Certified' : (v.condition || 'Used');
+        const condClass = v.condition || 'used';
+        const priceStr = '$' + parseInt(v.price || 0).toLocaleString();
+        const mileageStr = v.mileage ? parseInt(v.mileage).toLocaleString() + ' mi' : '—';
+
+        const tr = document.createElement('tr');
+        tr.setAttribute('data-vehicle-id', vehicleId);
+
+        // Check if image is base64 (very long) or a path
+        const isBase64 = imgSrc.startsWith('data:');
+        const imgDisplay = imgSrc ? 'block' : 'none';
+        const placeholderDisplay = imgSrc ? 'none' : 'flex';
+
+        tr.innerHTML = `
+          <td>
+            <div style="display:flex;align-items:center;gap:0.75rem">
+              <img src="${imgSrc}" class="vehicle-thumb" alt="${v.year} ${v.make} ${v.model}" 
+                   style="display:${imgDisplay}" 
+                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="vehicle-thumb" style="display:${placeholderDisplay};align-items:center;justify-content:center;background:var(--bg);color:var(--text-muted);font-size:10px">No Img</div>
+              <div>
+                <div class="vehicle-name">${v.year} ${v.make} ${v.model}</div>
+                <div class="vehicle-year">${v.engine || ''}</div>
+              </div>
+            </div>
+          </td>
+          <td>${v.year}</td>
+          <td><span class="condition-badge condition-${condClass}">${condLabel}</span></td>
+          <td class="price-tag">${priceStr}</td>
+          <td>${mileageStr}</td>
+          <td class="actions-cell">
+            <button class="btn btn-sm btn-secondary edit-btn" data-id="${vehicleId}">Edit</button>
+            <button class="btn btn-sm btn-danger delete-btn" data-id="${vehicleId}">Delete</button>
+          </td>
+        `;
+
+        tbody.appendChild(tr);
+      });
+
+      // Attach event listeners
+      attachTableListeners();
+      updateStats();
+      console.log('Table rendered with', filtered.length, 'vehicles');
+    }
+
+    function attachTableListeners() {
+      const tbody = document.getElementById('vehicleTableBody');
+      if (!tbody) return;
+
+      tbody.querySelectorAll('.edit-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          const id = this.getAttribute('data-id');
+          console.log('Edit button clicked, ID:', id);
+          editVehicle(id);
+        });
+      });
+
+      tbody.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          const id = this.getAttribute('data-id');
+          console.log('Delete button clicked, ID:', id);
+          deleteVehicle(id);
+        });
+      });
+    }
+
+    function updateStats() {
+      document.getElementById('statTotal').textContent = vehicles.length;
+      document.getElementById('statNew').textContent = vehicles.filter(v => v.condition === 'new').length;
+      document.getElementById('statUsed').textContent = vehicles.filter(v => v.condition === 'used').length;
+      document.getElementById('statCPO').textContent = vehicles.filter(v => v.condition === 'cpo').length;
+      const avg = vehicles.length ? Math.round(vehicles.reduce((a,v) => a + parseInt(v.price), 0) / vehicles.length) : 0;
+      document.getElementById('statAvg').textContent = '$' + avg.toLocaleString();
+    }
+
+    // ============================================================
+    // SEARCH & FILTER
+    // ============================================================
+    function searchVehicles(query) {
+      const q = query.toLowerCase();
+      const filtered = vehicles.filter(v =>
+        v.make.toLowerCase().includes(q) ||
+        v.model.toLowerCase().includes(q) ||
+        v.year.toString().includes(q)
+      );
+      renderTable(filtered);
+    }
+
+    function filterList(type) {
+      if (type === 'all') { renderTable(); return; }
+      renderTable(vehicles.filter(v => v.condition === type));
+    }
+
+    // ============================================================
+    // MODAL
+    // ============================================================
+    function openModal() {
+      editingId = null;
+      tempImages = [];
+      document.getElementById('vehicleForm').reset();
+      document.getElementById('modalTitle').textContent = 'Add New Vehicle';
+      document.getElementById('imagePreviewGrid').innerHTML = '';
+      document.getElementById('featuresInput').innerHTML = '<input type="text" id="featureInput" placeholder="e.g. Leather Seats, Sunroof, Navigation..." onkeydown="handleFeatureKey(event)">';
+      document.getElementById('vehicleModal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      document.getElementById('vehicleModal').classList.remove('open');
+      document.body.style.overflow = '';
+      // Reset form
+      document.getElementById('vehicleForm').reset();
+      // Clear state
+      editingId = null;
+      tempImages = [];
+      // Clear image previews
+      document.getElementById('imagePreviewGrid').innerHTML = '';
+      // Clear features
+      document.getElementById('featuresInput').innerHTML = '<input type="text" id="featureInput" placeholder="e.g. Leather Seats, Sunroof, Navigation..." onkeydown="handleFeatureKey(event)">';
+      // Reset modal title
+      document.getElementById('modalTitle').textContent = 'Add New Vehicle';
+      console.log('Modal closed, state reset');
+    }
+
+    // ============================================================
+    // IMAGE HANDLING
+    // ============================================================
+    function handleImages(input) {
+      const files = Array.from(input.files);
+      console.log('Selected', files.length, 'files');
+
+      files.forEach(file => {
+        // Check file size - warn if over 1MB (base64 makes it bigger)
+        if (file.size > 1024 * 1024) {
+          console.warn('Large image:', file.name, (file.size/1024/1024).toFixed(2) + 'MB');
+        }
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const base64 = e.target.result;
+          tempImages.push(base64);
+          console.log('Image loaded, size:', (base64.length / 1024).toFixed(1), 'KB');
+          renderImagePreviews();
+        };
+        reader.onerror = (e) => {
+          console.error('Error reading file:', e);
+          showToast('Error reading image: ' + file.name, 'error');
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function renderImagePreviews() {
+      const grid = document.getElementById('imagePreviewGrid');
+      grid.innerHTML = tempImages.map((src, i) => `
+        <div class="image-preview">
+          <img src="${src}">
+          <button type="button" class="remove-img" onclick="removeImage(${i})">&times;</button>
+        </div>
+      `).join('');
+    }
+
+    function removeImage(index) {
+      tempImages.splice(index, 1);
+      renderImagePreviews();
+    }
+
+    // ============================================================
+    // FEATURES TAGS
+    // ============================================================
+    function handleFeatureKey(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const input = e.target;
+        const val = input.value.trim();
+        if (val) {
+          addFeatureTag(val);
+          input.value = '';
+        }
+      }
+    }
+
+    function addFeatureTag(text) {
+      const container = document.getElementById('featuresInput');
+      const input = container.querySelector('input');
+      const tag = document.createElement('span');
+      tag.className = 'feature-tag';
+      tag.innerHTML = `${text} <button type="button" onclick="this.parentElement.remove()">&times;</button>`;
+      container.insertBefore(tag, input);
+    }
+
+    function getFeatures() {
+      return Array.from(document.querySelectorAll('.feature-tag')).map(t => t.childNodes[0].textContent.trim());
+    }
+
+    // ============================================================
+    // SAVE VEHICLE
+    // ============================================================
+    function saveVehicle(e) {
+      e.preventDefault();
+      console.log('saveVehicle called. editingId:', editingId);
+
+      // Get current images - use tempImages if new ones uploaded, else keep existing
+      let finalImages = tempImages.length > 0 ? tempImages : ['images/placeholder-car.jpg'];
+
+      // If editing and no new images uploaded, preserve existing images
+      if (editingId && tempImages.length === 0) {
+        const existing = vehicles.find(v => v.id == editingId);
+        if (existing && existing.images && existing.images.length > 0) {
+          finalImages = existing.images;
+        }
+      }
+
+      const vehicle = {
+        id: editingId ? String(editingId) : String(Date.now()),
+        make: document.getElementById('make').value,
+        model: document.getElementById('model').value,
+        year: parseInt(document.getElementById('year').value),
+        condition: document.getElementById('condition').value,
+        price: parseInt(document.getElementById('price').value),
+        mileage: parseInt(document.getElementById('mileage').value) || 0,
+        bodyType: document.getElementById('bodyType').value,
+        fuelType: document.getElementById('fuelType').value,
+        transmission: document.getElementById('transmission').value,
+        drivetrain: document.getElementById('drivetrain').value,
+        extColor: document.getElementById('extColor').value,
+        intColor: document.getElementById('intColor').value,
+        engine: document.getElementById('engine').value,
+        horsepower: parseInt(document.getElementById('horsepower').value) || 0,
+        features: getFeatures(),
+        description: document.getElementById('description').value,
+        images: finalImages
+      };
+
+      console.log('Saving vehicle:', vehicle.id, vehicle.make, vehicle.model);
+      console.log('Images count:', finalImages.length);
+
+      if (editingId) {
+        const idx = vehicles.findIndex(v => v.id == editingId);
+        console.log('Found existing at index:', idx);
+        if (idx !== -1) {
+          vehicles[idx] = vehicle;
+          showToast('Vehicle updated successfully', 'success');
+        } else {
+          showToast('Error: Could not find vehicle to update', 'error');
+          return;
+        }
+      } else {
+        vehicles.push(vehicle);
+        showToast('Vehicle added successfully', 'success');
+      }
+
+      saveToStorage();
+      console.log('Saved to localStorage. Total vehicles:', vehicles.length);
+
+      // Force clear editing state before re-render
+      editingId = null;
+      tempImages = [];
+
+      renderTable();
+      closeModal();
+      console.log('Modal closed and table re-rendered');
+    }
+
+    // ============================================================
+    // EDIT & DELETE
+    // ============================================================
+    // Make functions globally available for inline onclick handlers
+    window.editVehicle = editVehicle;
+    window.deleteVehicle = deleteVehicle;
+    window.openModal = openModal;
+    window.closeModal = closeModal;
+    window.saveVehicle = saveVehicle;
+    window.exportJSON = exportJSON;
+    window.importJSON = importJSON;
+    window.searchVehicles = searchVehicles;
+    window.filterList = filterList;
+    window.removeImage = removeImage;
+    window.handleFeatureKey = handleFeatureKey;
+
+    function editVehicle(id) {
+      console.log('Editing vehicle ID:', id, 'Type:', typeof id);
+      console.log('All vehicle IDs:', vehicles.map(v => ({id: v.id, type: typeof v.id})));
+
+      // Use loose equality (==) to handle string/number mismatch from JSON
+      const v = vehicles.find(vehicle => vehicle.id == id);
+      if (!v) {
+        console.error('Vehicle not found. Searched for:', id, 'Available:', vehicles.map(v => v.id));
+        showToast('Error: Vehicle not found (ID: ' + id + ')', 'error');
+        return;
+      }
+      console.log('Found vehicle:', v.make, v.model);
+
+      editingId = id;
+      tempImages = Array.isArray(v.images) ? [...v.images] : [];
+
+      // Populate form fields
+      const fields = {
+        'make': v.make || '',
+        'model': v.model || '',
+        'year': v.year || '',
+        'condition': v.condition || '',
+        'price': v.price || '',
+        'mileage': v.mileage || '',
+        'bodyType': v.bodyType || '',
+        'fuelType': v.fuelType || '',
+        'transmission': v.transmission || '',
+        'drivetrain': v.drivetrain || '',
+        'extColor': v.extColor || '',
+        'intColor': v.intColor || '',
+        'engine': v.engine || '',
+        'horsepower': v.horsepower || '',
+        'description': v.description || ''
+      };
+
+      Object.entries(fields).forEach(([fieldId, value]) => {
+        const el = document.getElementById(fieldId);
+        if (el) el.value = value;
+      });
+
+      // Features - clear and repopulate
+      const featuresContainer = document.getElementById('featuresInput');
+      featuresContainer.innerHTML = '';
+      const newInput = document.createElement('input');
+      newInput.type = 'text';
+      newInput.id = 'featureInput';
+      newInput.placeholder = 'e.g. Leather Seats, Sunroof, Navigation...';
+      newInput.onkeydown = handleFeatureKey;
+      featuresContainer.appendChild(newInput);
+
+      if (Array.isArray(v.features)) {
+        v.features.forEach(f => addFeatureTag(f));
+      }
+
+      // Images
+      renderImagePreviews();
+
+      document.getElementById('modalTitle').textContent = `Edit: ${v.year} ${v.make} ${v.model}`;
+      document.getElementById('vehicleModal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      console.log('Modal opened for editing');
+    }
+
+    function deleteVehicle(id) {
+      const v = vehicles.find(vehicle => vehicle.id == id);
+      const name = v ? `${v.year} ${v.make} ${v.model}` : 'this vehicle';
+      if (!confirm(`Delete ${name}?\n\nThis action cannot be undone.`)) return;
+      vehicles = vehicles.filter(vehicle => vehicle.id !== id);
+      saveToStorage();
+      renderTable();
+      showToast(`"${name}" deleted`, 'info');
+    }
+
+    // ============================================================
+    // IMPORT JSON
+    // ============================================================
+    function importJSON(input) {
+      const file = input.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const imported = JSON.parse(e.target.result);
+
+          // Validate it's an array
+          if (!Array.isArray(imported)) {
+            showToast('Invalid JSON: expected an array of vehicles', 'error');
+            return;
+          }
+
+          // Validate each vehicle has minimum required fields
+          const valid = imported.every(v => v.make && v.model && v.year && v.price);
+          if (!valid) {
+            showToast('Some vehicles are missing required fields (make, model, year, price)', 'error');
+            return;
+          }
+
+          // Ensure all vehicles have IDs (as strings for consistency)
+          imported.forEach((v, i) => {
+            if (!v.id) v.id = String(Date.now() + i);
+            else v.id = String(v.id); // Normalize to string
+            if (!v.images) v.images = ['images/placeholder-car.jpg'];
+            if (!v.features) v.features = [];
+            if (!v.mileage) v.mileage = 0;
+          });
+
+          const count = imported.length;
+
+          // Ask if user wants to merge or replace
+          if (vehicles.length > 0) {
+            const action = confirm(
+              `You have ${vehicles.length} vehicle(s) in the admin.\n\n` +
+              `Click OK to REPLACE them with ${count} imported vehicle(s).\n` +
+              `Click Cancel to MERGE (add imported to existing).`
+            );
+            if (action) {
+              // Replace
+              vehicles = imported;
+              showToast(`Replaced with ${count} vehicles`, 'success');
+            } else {
+              // Merge - avoid duplicates by ID
+              const existingIds = new Set(vehicles.map(v => v.id));
+              const newOnes = imported.filter(v => !existingIds.has(v.id));
+              vehicles = vehicles.concat(newOnes);
+              showToast(`Merged: added ${newOnes.length} new vehicles (${imported.length - newOnes.length} duplicates skipped)`, 'success');
+            }
+          } else {
+            vehicles = imported;
+            showToast(`Imported ${count} vehicles successfully`, 'success');
+          }
+
+          saveToStorage();
+          renderTable();
+          input.value = ''; // Reset input
+
+        } catch (err) {
+          showToast('Error reading JSON: ' + err.message, 'error');
+          input.value = '';
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    // ============================================================
+    // EXPORT JSON
+    // ============================================================
+    function exportJSON() {
+      const dataStr = JSON.stringify(vehicles, null, 2);
+      const blob = new Blob([dataStr], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'vehicles.json';
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('vehicles.json downloaded!', 'success');
+    }
+
+    // ============================================================
+    // TOAST
+    // ============================================================
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      toast.innerHTML = message;
+      container.appendChild(toast);
+      setTimeout(() => { toast.remove(); }, 4000);
+    }
+
+    // ============================================================
+    // INIT
+    // ============================================================
+    renderTable();
+
+    // Close modal on overlay click
+    document.getElementById('vehicleModal').addEventListener('click', (e) => {
+      if (e.target.id === 'vehicleModal') closeModal();
+    });
+  </script>
+</body>
+</html>

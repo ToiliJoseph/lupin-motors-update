@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "name": "Marcus Thompson",
+    "initials": "MT",
+    "location": "New York, NY",
+    "rating": 5,
+    "vehiclePurchased": "2024 BMW 530i M Sport",
+    "date": "2025-05-28",
+    "text": "Lupin made buying my first luxury car an absolute pleasure. No pressure, transparent pricing, and an incredible selection. The team walked me through every feature of the BMW and even helped me choose the right financing option. I drove away in my dream car the same day!",
+    "verified": true,
+    "source": "Google Reviews"
+  },
+  {
+    "id": 2,
+    "name": "Sarah Williams",
+    "initials": "SW",
+    "location": "Brooklyn, NY",
+    "rating": 5,
+    "vehiclePurchased": "2024 Mercedes-Benz GLE 450",
+    "date": "2025-06-02",
+    "text": "The trade-in process was seamless and they gave me fair market value for my old car. The team was professional, knowledgeable, and never once made me feel pressured. The GLE 450 is absolutely stunning and I couldn't be happier. Highly recommend Lupin to anyone looking for a luxury vehicle.",
+    "verified": true,
+    "source": "Google Reviews"
+  },
+  {
+    "id": 3,
+    "name": "David Chen",
+    "initials": "DC",
+    "location": "Manhattan, NY",
+    "rating": 5,
+    "vehiclePurchased": "2023 Audi Q7 55 TFSI",
+    "date": "2025-04-15",
+    "text": "Got approved for financing in under 20 minutes! The interest rate was significantly better than what my own bank offered. The whole experience from browsing online to driving home took just 3 hours. The online inventory search made it easy to find exactly what I was looking for beforehand.",
+    "verified": true,
+    "source": "Yelp"
+  },
+  {
+    "id": 4,
+    "name": "Jennifer Rodriguez",
+    "initials": "JR",
+    "location": "Queens, NY",
+    "rating": 5,
+    "vehiclePurchased": "2023 Land Rover Range Rover",
+    "date": "2025-05-10",
+    "text": "I've bought three cars from Lupin over the years and each time the service gets better. Their certified pre-owned program gives you real peace of mind — the 300-point inspection is thorough and the warranty is genuine. I won't shop anywhere else for my next vehicle. Outstanding dealership.",
+    "verified": true,
+    "source": "Cars.com"
+  },
+  {
+    "id": 5,
+    "name": "Michael Foster",
+    "initials": "MF",
+    "location": "New Jersey",
+    "rating": 5,
+    "vehiclePurchased": "2024 Porsche Cayenne S",
+    "date": "2025-06-08",
+    "text": "The online search tool made it incredibly easy to narrow down exactly what I wanted before visiting. When I arrived, the car was exactly as described — no hidden fees, no surprises. My salesperson was genuinely passionate about the Porsche and it showed. Perfect transaction from start to finish.",
+    "verified": true,
+    "source": "Google Reviews"
+  },
+  {
+    "id": 6,
+    "name": "Amelia Johnson",
+    "initials": "AJ",
+    "location": "Staten Island, NY",
+    "rating": 5,
+    "vehiclePurchased": "2024 Lexus RX 500h F Sport",
+    "date": "2025-05-22",
+    "text": "Their after-sales service is absolutely exceptional. Even months after purchasing, the team follows up and helps with any questions or concerns. The 7-day return policy gave me confidence to make my decision without feeling rushed. That's the kind of service that creates customers for life.",
+    "verified": true,
+    "source": "Trustpilot"
+  },
+  {
+    "id": 7,
+    "name": "Robert Kim",
+    "initials": "RK",
+    "location": "Long Island, NY",
+    "rating": 5,
+    "vehiclePurchased": "2024 Tesla Model S Plaid",
+    "date": "2025-06-01",
+    "text": "I was skeptical about buying an EV from a traditional dealership but Lupin's electric vehicle team knew the Model S Plaid inside and out. They walked me through charging, software updates, and long-term ownership. 1.99 seconds to 60 mph is something I'll never get tired of. Incredible car, incredible team.",
+    "verified": true,
+    "source": "Google Reviews"
+  },
+  {
+    "id": 8,
+    "name": "Lisa Patel",
+    "initials": "LP",
+    "location": "Hoboken, NJ",
+    "rating": 5,
+    "vehiclePurchased": "2024 Honda CR-V Touring Hybrid",
+    "date": "2025-05-18",
+    "text": "As a first-time car buyer, I was nervous about the whole process. The team at Lupin was incredibly patient — they explained everything clearly and never tried to upsell me on things I didn't need. The CR-V Hybrid is perfect for my commute. Getting 43 MPG in the city is just amazing.",
+    "verified": true,
+    "source": "Yelp"
+  }
+]

@@ -1,0 +1,1330 @@
+/* ============================================================
+   LIGHT-THEME-V2.CSS — AutoElite Motors
+   Professional light theme with depth, gradients, and visible imagery
+   ============================================================
+   
+   INSTRUCTIONS:
+   Link this file AFTER global.css and ALL other page CSS files.
+   It overrides only color values — no layout changes.
+   
+   ============================================================ */
+
+/* ============================================================
+   ROOT COLOR OVERRIDES — Richer, More Depth
+   ============================================================ */
+:root {
+  /* === PRIMARY ACCENT: Deep Navy Blue === */
+  --gold: #1a365d;
+  --gold-light: #2c5282;
+  --gold-dark: #0f1f33;
+  --gold-glow: rgba(26, 54, 93, 0.08);
+  --gold-glow-strong: rgba(26, 54, 93, 0.15);
+
+  /* === BACKGROUNDS: Layered grays for depth === */
+  --dark-950: #f0f2f5;
+  --dark-900: #ffffff;
+  --dark-800: #f7f8fa;
+  --dark-700: #eef0f4;
+  --dark-600: #e4e7ec;
+  --dark-500: #d1d5db;
+
+  /* === TEXT: Rich dark tones === */
+  --text-white: #0f172a;
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --text-faint: #94a3b8;
+
+  /* === BORDERS === */
+  --border-faint: #e2e8f0;
+  --border-subtle: #cbd5e1;
+  --border-medium: #94a3b8;
+
+  /* === CARDS & SURFACES === */
+  --bg-card: #ffffff;
+  --bg-card-hover: #f8fafc;
+  --bg-input: #ffffff;
+
+  /* === SHADOWS: Deeper for card separation === */
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
+  --shadow-md: 0 4px 16px rgba(15, 23, 42, 0.10);
+  --shadow-lg: 0 8px 30px rgba(15, 23, 42, 0.12);
+  --shadow-xl: 0 16px 48px rgba(15, 23, 42, 0.14);
+  --shadow-gold: 0 4px 20px rgba(26, 54, 93, 0.18);
+  --shadow-gold-card: 0 8px 32px rgba(26, 54, 93, 0.15);
+
+  /* === SUCCESS / ERROR / INFO === */
+  --success: #059669;
+  --success-bg: rgba(5, 150, 105, 0.08);
+  --error: #dc2626;
+  --error-bg: rgba(220, 38, 38, 0.08);
+  --info: #2563eb;
+  --info-bg: rgba(37, 99, 235, 0.08);
+
+  /* === SCROLLBAR === */
+  --scrollbar-track: #e2e8f0;
+  --scrollbar-thumb: #94a3b8;
+  --scrollbar-thumb-hover: #64748b;
+}
+
+/* ============================================================
+   BODY
+   ============================================================ */
+body {
+  background: var(--dark-950);
+  color: var(--text-primary);
+}
+
+/* ============================================================
+   NAVBAR — Semi-transparent glass effect
+   ============================================================ */
+.navbar {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.navbar-scrolled {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 20px rgba(15, 23, 42, 0.08);
+}
+
+.nav-link {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--gold);
+}
+
+.nav-link::after {
+  background: var(--gold);
+}
+
+/* Mobile menu */
+.mobile-menu {
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(16px);
+  border-top: 1px solid var(--border-faint);
+}
+
+.mobile-nav-link {
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-faint);
+}
+
+.mobile-nav-link.active {
+  color: var(--gold);
+  background: var(--gold-glow);
+}
+
+.hamburger span {
+  background: var(--text-primary);
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn-primary {
+  background: var(--gold);
+  color: #ffffff;
+  border-color: var(--gold);
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  background: var(--gold-light);
+  border-color: var(--gold-light);
+  box-shadow: var(--shadow-gold);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--gold);
+  border-color: var(--gold);
+  font-weight: 500;
+}
+
+.btn-secondary:hover {
+  background: var(--gold-glow);
+  color: var(--gold-dark);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border-color: var(--border-subtle);
+}
+
+.btn-ghost:hover {
+  background: var(--dark-800);
+  color: var(--text-primary);
+  border-color: var(--border-medium);
+}
+
+/* ============================================================
+   HERO SECTION — Dark overlay so background image is VISIBLE
+   ============================================================ */
+.hero {
+  position: relative;
+  background: #0f172a;
+}
+
+/* The hero slider overlay — DARK so image shows through clearly */
+.hero-slider-overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(15, 23, 42, 0.82) 0%,
+    rgba(15, 23, 42, 0.60) 45%,
+    rgba(15, 23, 42, 0.35) 100%
+  ) !important;
+}
+
+/* Hero text colors — WHITE on dark overlay */
+.hero-title {
+  color: #ffffff;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+}
+
+.hero-subtitle {
+  color: rgba(255, 255, 255, 0.85);
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Section label in hero */
+.hero .section-label {
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Hero search — glass effect */
+.hero-search {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(8px);
+}
+
+.hero-search .form-control {
+  color: var(--text-primary);
+}
+
+.hero-search .form-control::placeholder {
+  color: var(--text-muted);
+}
+
+/* Hero stats */
+.hero-stats {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.hero-stat-number {
+  color: #ffffff;
+}
+
+.hero-stat-label {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* ============================================================
+   SECTIONS — Alternating for visual rhythm
+   ============================================================ */
+
+/* Default section — white */
+.section {
+  background: var(--dark-900);
+}
+
+/* Alt section — very light gray */
+.section-alt {
+  background: var(--dark-950);
+}
+
+/* Dark section — slate gray (not black) */
+.section-dark {
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  color: #f1f5f9;
+}
+
+.section-dark .section-label {
+  color: #94a3b8;
+}
+
+.section-dark .heading-xl {
+  color: #f8fafc;
+}
+
+.section-dark p {
+  color: #cbd5e1;
+}
+
+/* Darker section — deeper slate */
+.section-darker {
+  background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+  color: #f1f5f9;
+}
+
+.section-darker .section-label {
+  color: #94a3b8;
+}
+
+.section-darker .heading-xl {
+  color: #f8fafc;
+}
+
+.section-darker p {
+  color: #cbd5e1;
+}
+
+/* ============================================================
+   CARDS — White with subtle depth
+   ============================================================ */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-faint);
+  box-shadow: var(--shadow-sm);
+  border-radius: 12px;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-subtle);
+}
+
+/* ============================================================
+   VEHICLE CARDS
+   ============================================================ */
+.vehicle-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-faint);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.vehicle-card:hover {
+  border-color: var(--border-subtle);
+  box-shadow: var(--shadow-gold-card);
+  transform: translateY(-4px);
+}
+
+.vehicle-title {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.vehicle-price {
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.vehicle-meta {
+  color: var(--text-muted);
+}
+
+.vehicle-tag {
+  background: var(--gold-glow);
+  color: var(--gold);
+  border: 1px solid rgba(26, 54, 93, 0.15);
+  font-weight: 500;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.vehicle-tag--special {
+  background: var(--success-bg);
+  color: var(--success);
+  border-color: rgba(5, 150, 105, 0.2);
+}
+
+/* ============================================================
+   FORMS & INPUTS
+   ============================================================ */
+.form-control {
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  border-radius: 8px;
+}
+
+.form-control:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(26, 54, 93, 0.1);
+}
+
+.form-control::placeholder {
+  color: var(--text-faint);
+}
+
+.form-label {
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 13px;
+}
+
+.form-check input[type="checkbox"] {
+  accent-color: var(--gold);
+}
+
+/* ============================================================
+   FINANCING CALCULATOR
+   ============================================================ */
+.calc-inputs {
+  background: var(--bg-card);
+  border: 1px solid var(--border-faint);
+  box-shadow: var(--shadow-sm);
+}
+
+.calc-results {
+  background: var(--bg-card);
+  border: 1px solid var(--border-faint);
+  box-shadow: var(--shadow-sm);
+}
+
+.calc-result-main {
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+}
+
+.calc-result-label {
+  color: #94a3b8;
+}
+
+.calc-result-amount {
+  color: #60a5fa;
+}
+
+.calc-result-sub {
+  color: #64748b;
+}
+
+.credit-btn {
+  background: var(--dark-800);
+  border-color: var(--border-subtle);
+  color: var(--text-secondary);
+  border-radius: 8px;
+}
+
+.credit-btn:hover {
+  border-color: var(--border-medium);
+  color: var(--text-primary);
+  background: var(--dark-700);
+}
+
+.credit-btn.active {
+  background: var(--gold-glow-strong);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.calc-range {
+  background: var(--dark-600);
+  height: 6px;
+  border-radius: 3px;
+}
+
+.calc-range::-webkit-slider-thumb {
+  background: var(--gold);
+  border-color: #ffffff;
+  box-shadow: 0 2px 8px rgba(26, 54, 93, 0.3);
+}
+
+.calc-range::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 12px rgba(26, 54, 93, 0.4);
+  transform: scale(1.15);
+}
+
+/* Breakdown */
+.breakdown-row {
+  border-bottom-color: var(--border-faint);
+}
+
+.breakdown-total {
+  background: var(--dark-800);
+  border-color: var(--border-subtle);
+  border-radius: 8px;
+}
+
+.breakdown-label {
+  color: var(--text-secondary);
+}
+
+.breakdown-value {
+  color: var(--text-primary);
+}
+
+.breakdown-deduct {
+  color: var(--success);
+}
+
+/* ============================================================
+   RATE CARDS
+   ============================================================ */
+.rate-card {
+  background: var(--bg-card);
+  border-color: var(--border-faint);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.rate-card:hover {
+  border-color: var(--border-subtle);
+  box-shadow: var(--shadow-gold-card);
+  transform: translateY(-4px);
+}
+
+.rate-num {
+  color: var(--gold);
+}
+
+.rate-unit {
+  color: var(--gold-light);
+}
+
+.rate-term {
+  color: var(--text-secondary);
+}
+
+.rate-badge {
+  background: var(--success-bg);
+  color: var(--success);
+  border-color: rgba(5, 150, 105, 0.2);
+}
+
+.rate-badge--popular {
+  background: var(--gold-glow-strong);
+  color: var(--gold);
+  border-color: var(--gold);
+}
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+.faq-item {
+  background: var(--bg-card);
+  border-color: var(--border-faint);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+}
+
+.faq-item:hover {
+  border-color: var(--border-subtle);
+}
+
+.faq-item[open] {
+  border-color: var(--border-subtle);
+  box-shadow: var(--shadow-md);
+}
+
+.faq-question {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.faq-question:hover {
+  color: var(--gold);
+}
+
+.faq-icon {
+  color: var(--gold);
+}
+
+.faq-answer {
+  color: var(--text-secondary);
+  border-top-color: var(--border-faint);
+}
+
+/* ============================================================
+   TEAM CARDS
+   ============================================================ */
+.team-card {
+  background: var(--bg-card);
+  border-color: var(--border-faint);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.team-card:hover {
+  border-color: var(--border-subtle);
+  box-shadow: var(--shadow-gold-card);
+  transform: translateY(-6px);
+}
+
+.team-name {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.team-role {
+  color: var(--gold);
+  font-weight: 500;
+}
+
+.team-bio {
+  color: var(--text-secondary);
+}
+
+/* ============================================================
+   WHY CARDS / DEPT CARDS / SERVICE CARDS
+   ============================================================ */
+.why-card,
+.dept-card {
+  background: var(--bg-card);
+  border-color: var(--border-faint);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.why-card:hover,
+.dept-card:hover {
+  border-color: var(--border-subtle);
+  box-shadow: var(--shadow-gold-card);
+  transform: translateY(-4px);
+}
+
+.why-icon,
+.dept-icon {
+  background: var(--gold-glow);
+  border-color: var(--border-faint);
+  color: var(--gold);
+  border-radius: 12px;
+}
+
+.why-title,
+.dept-name {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.why-desc,
+.dept-desc {
+  color: var(--text-secondary);
+}
+
+.dept-link {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.dept-link:hover {
+  color: var(--gold-light);
+}
+
+/* Service cards */
+.service-card {
+  background: var(--bg-card);
+  border-color: var(--border-faint);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ============================================================
+   TESTIMONIAL CARDS
+   ============================================================ */
+.testimonial-card {
+  background: var(--bg-card);
+  border-color: var(--border-faint);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.testimonial-card:hover {
+  border-color: var(--border-subtle);
+}
+
+.testimonial-card--featured {
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.testimonial-card--featured .testimonial-quote {
+  color: #e2e8f0;
+}
+
+.testimonial-card--featured .testimonial-name {
+  color: #f8fafc;
+}
+
+.testimonial-card--featured .testimonial-vehicle {
+  color: #94a3b8;
+}
+
+.star-filled {
+  color: #f59e0b;
+  fill: #f59e0b;
+}
+
+.testimonial-quote {
+  color: var(--text-secondary);
+}
+
+.testimonial-name {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.testimonial-vehicle {
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   CONTACT / INFO CARDS
+   ============================================================ */
+.contact-info-card {
+  background: var(--bg-card);
+  border-color: var(--border-faint);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.contact-info-title {
+  color: var(--text-primary);
+}
+
+.contact-info-desc {
+  color: var(--text-secondary);
+}
+
+.contact-detail-icon {
+  background: var(--gold-glow);
+  border-color: var(--border-faint);
+  color: var(--gold);
+  border-radius: 10px;
+}
+
+.contact-detail-label {
+  color: var(--text-muted);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.contact-detail-value {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.contact-detail-value a {
+  color: var(--gold);
+}
+
+.contact-detail-value a:hover {
+  color: var(--gold-light);
+}
+
+.contact-social-label {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* Map placeholder */
+.contact-map-placeholder {
+  background: linear-gradient(135deg, var(--dark-800), var(--dark-700));
+  color: var(--text-muted);
+  border-radius: 12px;
+}
+
+.contact-map-placeholder span {
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+/* ============================================================
+   FOOTER — Dark slate (not white!) for contrast
+   ============================================================ */
+.footer {
+  background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: #cbd5e1;
+}
+
+.footer-logo .logo-name {
+  color: #f8fafc;
+}
+
+.footer-logo .logo-tag {
+  color: #60a5fa;
+}
+
+.footer-brand-desc {
+  color: #94a3b8;
+}
+
+.footer-col-title {
+  color: #f8fafc;
+  font-weight: 600;
+}
+
+.footer-links a {
+  color: #94a3b8;
+}
+
+.footer-links a:hover {
+  color: #60a5fa;
+}
+
+.footer-contact-list li,
+.footer-contact-list a,
+.footer-contact-list span {
+  color: #94a3b8;
+}
+
+.footer-contact-list a:hover {
+  color: #60a5fa;
+}
+
+.footer-contact-list li i {
+  color: #60a5fa;
+}
+
+.footer-bottom {
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+.footer-bottom p {
+  color: #64748b;
+}
+
+.footer-bottom-links a {
+  color: #64748b;
+}
+
+.footer-bottom-links a:hover {
+  color: #60a5fa;
+}
+
+/* Social buttons in footer */
+.footer .social-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #94a3b8;
+}
+
+.footer .social-btn:hover {
+  background: rgba(96, 165, 250, 0.15);
+  border-color: rgba(96, 165, 250, 0.3);
+  color: #60a5fa;
+}
+
+/* ============================================================
+   BACK TO TOP
+   ============================================================ */
+.back-to-top {
+  background: var(--gold);
+  color: #ffffff;
+  box-shadow: 0 4px 20px rgba(26, 54, 93, 0.35);
+  border-radius: 12px;
+}
+
+.back-to-top:hover {
+  background: var(--gold-light);
+  box-shadow: 0 6px 24px rgba(26, 54, 93, 0.45);
+}
+
+/* ============================================================
+   TOASTS
+   ============================================================ */
+.toast {
+  background: var(--bg-card);
+  border-color: var(--border-subtle);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-lg);
+  border-radius: 12px;
+}
+
+.toast--success {
+  border-color: rgba(5, 150, 105, 0.3);
+  background: linear-gradient(135deg, var(--dark-900), rgba(5, 150, 105, 0.05));
+}
+
+.toast--error {
+  border-color: rgba(220, 38, 38, 0.3);
+  background: linear-gradient(135deg, var(--dark-900), rgba(220, 38, 38, 0.05));
+}
+
+.toast--info {
+  border-color: rgba(37, 99, 235, 0.3);
+  background: linear-gradient(135deg, var(--dark-900), rgba(37, 99, 235, 0.05));
+}
+
+/* ============================================================
+   BREADCRUMB
+   ============================================================ */
+.breadcrumb {
+  color: var(--text-muted);
+}
+
+.breadcrumb a {
+  color: var(--text-secondary);
+}
+
+.breadcrumb a:hover {
+  color: var(--gold);
+}
+
+.breadcrumb-sep {
+  color: var(--text-faint);
+}
+
+.breadcrumb .current {
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   INVENTORY SIDEBAR
+   ============================================================ */
+.inventory-sidebar {
+  background: var(--bg-card);
+  border-color: var(--border-faint);
+  box-shadow: var(--shadow-md);
+}
+
+.filter-group-title {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.filter-option label {
+  color: var(--text-secondary);
+}
+
+.filter-count {
+  color: var(--text-muted);
+}
+
+.price-slider-track {
+  background: var(--dark-600);
+}
+
+.price-slider-fill {
+  background: var(--gold);
+}
+
+.price-slider-thumb {
+  background: var(--gold);
+  border-color: #ffffff;
+  box-shadow: 0 2px 8px rgba(26, 54, 93, 0.3);
+}
+
+/* ============================================================
+   VEHICLE DETAIL PAGE
+   ============================================================ */
+.detail-sidebar {
+  background: var(--bg-card);
+  border-color: var(--border-faint);
+  box-shadow: var(--shadow-sm);
+  border-radius: 16px;
+}
+
+.price-display {
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.spec-tab {
+  color: var(--text-secondary);
+  border-bottom-color: var(--border-faint);
+}
+
+.spec-tab:hover {
+  color: var(--gold);
+}
+
+.spec-tab.active {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+
+/* Gallery */
+.gallery-main {
+  background: var(--dark-800);
+  border-radius: 12px;
+}
+
+.gallery-thumb {
+  border-color: transparent;
+  border-radius: 8px;
+}
+
+.gallery-thumb.active {
+  border-color: var(--gold);
+}
+
+/* Lightbox */
+.lightbox {
+  background: rgba(15, 23, 42, 0.95);
+}
+
+.lightbox-close {
+  color: #ffffff;
+}
+
+/* ============================================================
+   COMPARE DRAWER
+   ============================================================ */
+.compare-drawer {
+  background: var(--bg-card);
+  border-color: var(--border-subtle);
+  box-shadow: var(--shadow-xl);
+  border-radius: 16px 16px 0 0;
+}
+
+.compare-vehicle {
+  background: var(--dark-800);
+  border-color: var(--border-faint);
+  border-radius: 10px;
+}
+
+/* ============================================================
+   MODALS
+   ============================================================ */
+.modal-overlay {
+  background: rgba(15, 23, 42, 0.6);
+}
+
+.modal-content {
+  background: var(--bg-card);
+  box-shadow: var(--shadow-xl);
+  border-radius: 16px;
+}
+
+.modal-header {
+  border-bottom-color: var(--border-faint);
+}
+
+.modal-title {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.modal-close {
+  color: var(--text-muted);
+}
+
+.modal-close:hover {
+  color: var(--text-primary);
+}
+
+/* ============================================================
+   PAGINATION
+   ============================================================ */
+.pagination-btn {
+  background: var(--bg-card);
+  border-color: var(--border-faint);
+  color: var(--text-secondary);
+  border-radius: 8px;
+}
+
+.pagination-btn:hover {
+  border-color: var(--border-subtle);
+  color: var(--text-primary);
+  background: var(--dark-800);
+}
+
+.pagination-btn.active {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #ffffff;
+}
+
+.pagination-btn:disabled {
+  color: var(--text-faint);
+}
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+/* ============================================================
+   SKELETON LOADING
+   ============================================================ */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--dark-600) 25%,
+    var(--dark-500) 50%,
+    var(--dark-600) 75%
+  );
+}
+
+/* ============================================================
+   CATEGORY CARDS
+   ============================================================ */
+.category-card {
+  background: var(--bg-card);
+  border-color: var(--border-faint);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.category-card:hover {
+  border-color: var(--gold);
+  box-shadow: var(--shadow-gold-card);
+  transform: translateY(-4px);
+}
+
+.category-icon {
+  background: var(--gold-glow);
+  color: var(--gold);
+  border-radius: 12px;
+}
+
+.category-name {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* ============================================================
+   STATS / COUNTERS
+   ============================================================ */
+.stat-number,
+.story-stat-num {
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.stat-label,
+.story-stat-label {
+  color: var(--text-secondary);
+}
+
+.stat-suffix {
+  color: var(--gold-light);
+}
+
+.stat-divider {
+  background: var(--border-faint);
+}
+
+/* ============================================================
+   DEALS CAROUSEL
+   ============================================================ */
+.deal-card {
+  background: var(--bg-card);
+  border-color: var(--border-faint);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.deal-badge {
+  background: var(--gold-glow-strong);
+  color: var(--gold);
+  border-color: var(--gold);
+  font-weight: 600;
+}
+
+/* ============================================================
+   HERO SLIDER DOTS
+   ============================================================ */
+.hero-slider-dot {
+  background: rgba(255, 255, 255, 0.35);
+  border: 2px solid transparent;
+}
+
+.hero-slider-dot:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.hero-slider-dot.active {
+  background: #60a5fa;
+  border-color: #60a5fa;
+  box-shadow: 0 0 12px rgba(96, 165, 250, 0.5);
+}
+
+/* ============================================================
+   SECTION LABELS & HEADINGS
+   ============================================================ */
+.section-label {
+  color: var(--gold);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.text-gold {
+  color: var(--gold);
+}
+
+.heading-xl {
+  color: var(--text-primary);
+}
+
+/* ============================================================
+   ABOUT PAGE SPECIFICS
+   ============================================================ */
+.about-hero {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
+.about-hero-title {
+  color: #f8fafc;
+}
+
+.about-hero-subtitle {
+  color: #cbd5e1;
+}
+
+.story-content .section-label {
+  color: var(--gold);
+}
+
+.story-text {
+  color: var(--text-secondary);
+}
+
+.story-value {
+  color: var(--text-primary);
+}
+
+.story-value i {
+  color: var(--gold);
+}
+
+/* Story stats float */
+.story-stats-float {
+  background: var(--bg-card);
+  border-color: var(--border-faint);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ============================================================
+   CONTACT PAGE SPECIFICS
+   ============================================================ */
+.contact-hero {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
+.contact-hero-title {
+  color: #f8fafc;
+}
+
+.contact-hero-subtitle {
+  color: #cbd5e1;
+}
+
+.contact-form {
+  background: var(--bg-card);
+  border-color: var(--border-faint);
+  box-shadow: var(--shadow-sm);
+  border-radius: 16px;
+}
+
+.contact-form-title {
+  color: var(--text-primary);
+}
+
+/* ============================================================
+   FINANCING PAGE SPECIFICS
+   ============================================================ */
+.financing-hero {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
+.financing-hero-title {
+  color: #f8fafc;
+}
+
+.financing-hero-subtitle {
+  color: #cbd5e1;
+}
+
+.finance-form {
+  background: var(--bg-card);
+  border-color: var(--border-faint);
+  box-shadow: var(--shadow-sm);
+  border-radius: 16px;
+}
+
+.form-section-title {
+  color: var(--gold);
+  border-bottom-color: var(--border-faint);
+}
+
+/* ============================================================
+   CTA BANNER — Dark with gradient
+   ============================================================ */
+.cta-banner-bg {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+}
+
+.cta-banner-bg::before {
+  background: radial-gradient(ellipse at 30% 50%, rgba(96, 165, 250, 0.1) 0%, transparent 60%);
+}
+
+.cta-banner .section-label {
+  color: #94a3b8;
+}
+
+.cta-banner .display-md {
+  color: #f8fafc;
+}
+
+.cta-banner .text-secondary {
+  color: #cbd5e1;
+}
+
+/* ============================================================
+   SERVICES PAGE
+   ============================================================ */
+.services-hero {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
+/* ============================================================
+   INVENTORY PAGE
+   ============================================================ */
+.inventory-hero {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
+/* ============================================================
+   VEHICLE DETAIL PAGE
+   ============================================================ */
+.detail-hero {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
+/* ============================================================
+   PRINT STYLES
+   ============================================================ */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .section-dark,
+  .section-darker,
+  .footer,
+  .cta-banner-bg {
+    background: white !important;
+  }
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

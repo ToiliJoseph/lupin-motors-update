@@ -1,0 +1,12 @@
+
+robots_txt = """User-agent: *
+Allow: /
+
+Sitemap: https://yourdomain.com/sitemap.xml
+"""
+
+with open('/mnt/agents/output/robots.txt', 'w') as f:
+    f.write(robots_txt)
+
+print("robots.txt created")
+print(robots_txt)

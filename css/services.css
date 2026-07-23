@@ -1,0 +1,235 @@
+/* ============================================================
+   SERVICES.CSS — AutoElite Motors
+   Full services page styling
+   ============================================================ */
+
+/* ============================================================
+   SERVICES HERO
+   ============================================================ */
+.services-hero {
+  background: var(--dark-950);
+  border-bottom: 1px solid var(--border-faint);
+  padding: calc(var(--navbar-height) + var(--space-10)) 0 var(--space-12);
+}
+
+.services-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: var(--fw-bold);
+  color: var(--text-white);
+  margin: var(--space-4) 0 var(--space-3);
+  line-height: var(--lh-tight);
+}
+
+.services-hero-subtitle {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  max-width: 600px;
+}
+
+/* ============================================================
+   SERVICES FULL GRID
+   ============================================================ */
+.services-full-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+/* ============================================================
+   SERVICE FULL CARD
+   ============================================================ */
+.service-full-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-10);
+  align-items: center;
+  padding: var(--space-10) var(--space-8);
+  background: var(--bg-card);
+  border: 1px solid var(--border-faint);
+  border-radius: var(--radius-2xl);
+  position: relative;
+  overflow: hidden;
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.service-full-card:hover {
+  border-color: var(--border-subtle);
+  box-shadow: var(--shadow-gold-card);
+}
+
+.service-full-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--gold-light), var(--gold-dark));
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.service-full-card:hover::before {
+  opacity: 1;
+}
+
+/* Reverse layout (image left, content right) */
+.service-full-card--reverse {
+  direction: rtl;
+}
+
+.service-full-card--reverse > * {
+  direction: ltr;
+}
+
+/* Icon */
+.service-full-icon {
+  position: absolute;
+  top: var(--space-5);
+  right: var(--space-5);
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-lg);
+  background: var(--gold-glow);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+}
+
+.service-full-card--reverse .service-full-icon {
+  right: auto;
+  left: var(--space-5);
+}
+
+/* Content */
+.service-full-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding-right: var(--space-4);
+}
+
+.service-full-card--reverse .service-full-content {
+  padding-right: 0;
+  padding-left: var(--space-4);
+}
+
+.service-full-title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: var(--fw-bold);
+  color: var(--text-white);
+  line-height: var(--lh-snug);
+}
+
+.service-full-desc {
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+  line-height: var(--lh-relaxed);
+}
+
+.service-full-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: var(--space-2) 0;
+}
+
+.service-full-list li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.service-full-list li i {
+  color: var(--success);
+  flex-shrink: 0;
+}
+
+/* Visual / placeholder */
+.service-full-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
+}
+
+.service-visual-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  padding: var(--space-8);
+  background: linear-gradient(135deg, var(--dark-700), var(--dark-600));
+  border: 1px solid var(--border-faint);
+  border-radius: var(--radius-xl);
+  color: var(--text-faint);
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 4/3;
+}
+
+.service-visual-placeholder svg {
+  opacity: 0.4;
+}
+
+.service-visual-placeholder span {
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1024px) {
+  .service-full-card,
+  .service-full-card--reverse {
+    grid-template-columns: 1fr;
+    direction: ltr;
+  }
+
+  .service-full-card--reverse > * {
+    direction: ltr;
+  }
+
+  .service-full-card--reverse .service-full-content {
+    padding-left: 0;
+  }
+
+  .service-full-visual {
+    order: -1;
+    min-height: 200px;
+  }
+
+  .service-full-icon {
+    top: var(--space-4);
+    right: var(--space-4);
+  }
+
+  .service-full-card--reverse .service-full-icon {
+    left: auto;
+    right: var(--space-4);
+  }
+}
+
+@media (max-width: 640px) {
+  .service-full-card {
+    padding: var(--space-6) var(--space-4);
+  }
+
+  .service-full-title {
+    font-size: var(--text-xl);
+  }
+
+  .service-visual-placeholder {
+    max-width: 100%;
+    aspect-ratio: 16/9;
+  }
+}

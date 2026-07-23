@@ -1,0 +1,747 @@
+/* ============================================================
+   FINANCING.CSS — AutoElite Motors
+   Loan calculator, rate cards, FAQ accordion, application form
+   ============================================================ */
+
+/* ============================================================
+   FINANCING HERO
+   ============================================================ */
+.financing-hero {
+  background: var(--dark-950);
+  border-bottom: 1px solid var(--border-faint);
+  padding: calc(var(--navbar-height) + var(--space-10)) 0 var(--space-12);
+}
+
+.financing-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: var(--fw-bold);
+  color: var(--text-white);
+  margin: var(--space-4) 0 var(--space-3);
+  line-height: var(--lh-tight);
+}
+
+.financing-hero-subtitle {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  max-width: 640px;
+}
+
+/* ============================================================
+   CALCULATOR LAYOUT
+   ============================================================ */
+.calc-layout {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+/* ============================================================
+   CALCULATOR INPUTS
+   ============================================================ */
+.calc-inputs {
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.calc-section-title {
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--gold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-2);
+}
+
+.calc-input-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.calc-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  flex: 1;
+}
+
+.calc-input-group .form-label {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  margin-bottom: 0;
+}
+
+.input-prefix-wrap,
+.input-suffix-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-prefix {
+  position: absolute;
+  left: 12px;
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.input-suffix {
+  position: absolute;
+  right: 12px;
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.input-prefix-wrap .form-control {
+  padding-left: 1.8rem;
+}
+
+.input-suffix-wrap .form-control {
+  padding-right: 2rem;
+}
+
+.calc-range {
+  margin-top: var(--space-1);
+}
+
+.calc-percent-badge {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.15rem 0.5rem;
+  background: var(--gold-glow);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: var(--fw-bold);
+  color: var(--gold);
+}
+
+.calc-divider {
+  height: 1px;
+  background: var(--border-faint);
+  margin: var(--space-2) 0;
+}
+
+.calc-row-two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+/* Credit score buttons */
+.credit-score-options {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-2);
+}
+
+.credit-btn {
+  padding: var(--space-3) var(--space-2);
+  background: var(--dark-500);
+  border: 1.5px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-family: var(--font-heading);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-semibold);
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  line-height: 1.4;
+}
+
+.credit-btn span {
+  display: block;
+  font-size: 10px;
+  font-weight: var(--fw-regular);
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.credit-btn:hover {
+  border-color: var(--border-medium);
+  color: var(--text-primary);
+}
+
+.credit-btn.active {
+  background: var(--gold-glow-strong);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.credit-btn.active span {
+  color: var(--gold-light);
+}
+
+/* ============================================================
+   CALCULATOR RESULTS
+   ============================================================ */
+.calc-results {
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  position: sticky;
+  top: calc(var(--navbar-height) + var(--space-4));
+}
+
+.calc-result-main {
+  text-align: center;
+  padding: var(--space-6);
+  background: linear-gradient(135deg, var(--dark-500), var(--dark-600));
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+}
+
+.calc-result-label {
+  display: block;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-2);
+}
+
+.calc-result-amount {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: var(--fw-bold);
+  color: var(--gold-light);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.calc-result-sub {
+  display: block;
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  margin-top: var(--space-2);
+}
+
+/* Breakdown */
+.calc-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--border-faint);
+  gap: var(--space-4);
+}
+
+.breakdown-total {
+  padding: var(--space-3) var(--space-4);
+  margin: var(--space-2) 0;
+  background: var(--dark-500);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+}
+
+.breakdown-label {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.breakdown-value {
+  font-size: var(--text-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+}
+
+.breakdown-deduct {
+  color: var(--success);
+}
+
+.breakdown-divider {
+  height: 1px;
+  background: var(--border-faint);
+  margin: var(--space-2) 0;
+}
+
+/* Actions */
+.calc-result-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: auto;
+}
+
+.calc-disclaimer {
+  font-size: 11px;
+  color: var(--text-faint);
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* ============================================================
+   RATE CARDS
+   ============================================================ */
+.rates-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-5);
+}
+
+.rate-card {
+  position: relative;
+  padding: var(--space-8) var(--space-6);
+  background: var(--bg-card);
+  border: 1px solid var(--border-faint);
+  border-radius: var(--radius-xl);
+  text-align: center;
+  transition: all var(--transition-base);
+  overflow: hidden;
+}
+
+.rate-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-subtle);
+  box-shadow: var(--shadow-gold-card);
+}
+
+.rate-apr {
+  margin-bottom: var(--space-4);
+}
+
+.rate-num {
+  font-family: var(--font-heading);
+  font-size: var(--text-5xl);
+  font-weight: var(--fw-bold);
+  color: var(--gold-light);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.rate-unit {
+  font-size: var(--text-lg);
+  font-weight: var(--fw-semibold);
+  color: var(--gold);
+}
+
+.rate-term {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: var(--lh-relaxed);
+}
+
+.rate-badge {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  padding: 0.2rem 0.6rem;
+  background: var(--success-bg);
+  color: var(--success);
+  border: 1px solid rgba(46,204,113,0.2);
+  border-radius: var(--radius-full);
+  font-size: 10px;
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.rate-badge--popular {
+  background: var(--gold-glow-strong);
+  color: var(--gold);
+  border-color: var(--gold);
+}
+
+/* ============================================================
+   FAQ ACCORDION
+   ============================================================ */
+.faq-list {
+  max-width: 800px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.faq-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-faint);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.faq-item:hover {
+  border-color: var(--border-subtle);
+}
+
+.faq-item[open] {
+  border-color: var(--border-subtle);
+  box-shadow: var(--shadow-sm);
+}
+
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-5) var(--space-6);
+  cursor: pointer;
+  font-family: var(--font-heading);
+  font-size: var(--text-base);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+  list-style: none;
+  transition: color var(--transition-fast);
+}
+
+.faq-question::-webkit-details-marker {
+  display: none;
+}
+
+.faq-question:hover {
+  color: var(--gold-light);
+}
+
+.faq-icon {
+  color: var(--gold);
+  flex-shrink: 0;
+  margin-left: var(--space-4);
+  transition: transform var(--transition-fast);
+}
+
+.faq-item[open] .faq-icon {
+  transform: rotate(45deg);
+}
+
+.faq-answer {
+  padding: 0 var(--space-6) var(--space-5);
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  line-height: var(--lh-relaxed);
+  border-top: 1px solid var(--border-faint);
+  margin-top: var(--space-3);
+}
+
+.faq-answer p {
+  margin: 0;
+}
+
+/* ============================================================
+   APPLICATION FORM
+   ============================================================ */
+.finance-form {
+  max-width: 900px;
+  margin-inline: auto;
+  padding: var(--space-8) var(--space-10);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.form-section-title {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-weight: var(--fw-semibold);
+  color: var(--gold);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border-faint);
+  margin-bottom: var(--space-2);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.form-row--three {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.form-group .form-label {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin-bottom: 0;
+}
+
+.form-group .form-control {
+  width: 100%;
+}
+
+.form-check {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  cursor: pointer;
+  padding: var(--space-2) 0;
+}
+
+.form-check input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: var(--gold);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.form-check .text-sm {
+  line-height: var(--lh-relaxed);
+}
+
+.form-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-faint);
+}
+
+.form-security-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.form-security-note i {
+  color: var(--success);
+}
+
+/* ============================================================
+   CTA BANNER
+   ============================================================ */
+.cta-banner {
+  position: relative;
+  padding: var(--space-16) 0;
+  overflow: hidden;
+}
+
+.cta-banner-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--dark-800) 0%, var(--dark-900) 100%);
+  z-index: 0;
+}
+
+.cta-banner-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 30% 50%, rgba(201, 168, 76, 0.08) 0%, transparent 60%);
+}
+
+.cta-banner-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.cta-banner-content {
+  max-width: 520px;
+}
+
+.cta-banner-content .section-label {
+  margin-bottom: var(--space-3);
+}
+
+.cta-banner-content .display-md {
+  margin-bottom: var(--space-4);
+}
+
+.cta-banner-actions {
+  display: flex;
+  gap: var(--space-4);
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   BREADCRUMB
+   ============================================================ */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  margin-bottom: var(--space-4);
+}
+
+.breadcrumb a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.breadcrumb a:hover {
+  color: var(--gold);
+}
+
+.breadcrumb-sep {
+  color: var(--text-faint);
+}
+
+.breadcrumb .current {
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   SECTION VARIANTS
+   ============================================================ */
+.section-darker {
+  background: var(--dark-950);
+}
+
+/* ============================================================
+   RANGE INPUT STYLING
+   ============================================================ */
+.calc-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  background: var(--dark-600);
+  border-radius: var(--radius-full);
+  outline: none;
+  cursor: pointer;
+}
+
+.calc-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  background: var(--gold);
+  border: 2px solid var(--dark-900);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.calc-range::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 12px rgba(201, 168, 76, 0.4);
+}
+
+.calc-range::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  background: var(--gold);
+  border: 2px solid var(--dark-900);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.calc-range::-moz-range-track {
+  height: 6px;
+  background: var(--dark-600);
+  border-radius: var(--radius-full);
+}
+
+/* ============================================================
+   FINANCING PAGE RESPONSIVE
+   ============================================================ */
+@media (max-width: 1200px) {
+  .calc-layout {
+    grid-template-columns: 1fr 380px;
+  }
+
+  .rates-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .calc-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .calc-results {
+    position: static;
+  }
+
+  .cta-banner-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .cta-banner-actions {
+    flex-direction: column;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .finance-form {
+    padding: var(--space-6);
+  }
+}
+
+@media (max-width: 768px) {
+  .financing-hero {
+    padding: calc(var(--navbar-height) + var(--space-8)) 0 var(--space-8);
+  }
+
+  .rates-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .credit-score-options {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .form-row--three {
+    grid-template-columns: 1fr;
+  }
+
+  .calc-inputs,
+  .calc-results {
+    padding: var(--space-5);
+  }
+
+  .finance-form {
+    padding: var(--space-5);
+  }
+}
+
+@media (max-width: 480px) {
+  .credit-score-options {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .calc-row-two {
+    grid-template-columns: 1fr;
+  }
+
+  .rate-num {
+    font-size: var(--text-4xl);
+  }
+}
