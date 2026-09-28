@@ -62,7 +62,7 @@ function initNavbar() {
   // Mobile hamburger toggle
   if (hamburger && mobileMenu) {
     hamburger.addEventListener('click', () => {
-      const isOpen = hamburviviger.classList.toggle('active');
+      const isOpen = hamburger.classList.toggle('active');
       mobileMenu.classList.toggle('active', isOpen);
       hamburger.setAttribute('aria-expanded', isOpen);
       mobileMenu.setAttribute('aria-hidden', !isOpen);
